@@ -1,0 +1,2461 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.4.549">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>AI Website Analysis with Python</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script><script src="Task8_files/libs/clipboard/clipboard.min.js"></script>
+<script src="Task8_files/libs/quarto-html/quarto.js"></script>
+<script src="Task8_files/libs/quarto-html/popper.min.js"></script>
+<script src="Task8_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="Task8_files/libs/quarto-html/anchor.min.js"></script>
+<link href="Task8_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="Task8_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="Task8_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="Task8_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="Task8_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
+
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
+
+
+</head>
+
+<body class="fullcontent">
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">AI Website Analysis with Python</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="ai-website-analysis-with-python" class="level3">
+<h3 class="anchored" data-anchor-id="ai-website-analysis-with-python">AI Website Analysis with Python</h3>
+<ul>
+<li>Name:LI WAN</li>
+<li>Student Number:223718804</li>
+<li>E-mail:s223718804@deakin.edu.au</li>
+<li>Course:SIT731</li>
+</ul>
+<hr>
+</section>
+<section id="introduction" class="level3">
+<h3 class="anchored" data-anchor-id="introduction">Introduction</h3>
+<p>The Artificial Intelligence (AI) Stack Exchange website serves as a hub for individuals interested in exploring and discussing topics related to artificial intelligence. With a vast repository of questions and answers, the platform fosters an active community of enthusiasts, professionals, and learners alike. To delve deeper into the dynamics of this community, we embarked on an analytical journey by harnessing data from various facets of the AI Stack Exchange ecosystem.</p>
+<p>Upon acquiring datasets encompassing user profiles, post summaries, and engagement metrics, our objective was to unravel insights into the geographical distribution, occupations, post types, and thematic interests prevalent within the AI domain. Leveraging techniques such as regular expression parsing, keyword matching, and temporal analysis, we embarked on a comprehensive exploration of the data to glean meaningful observations.</p>
+</section>
+<section id="data-wrangling" class="level3">
+<h3 class="anchored" data-anchor-id="data-wrangling">Data Wrangling</h3>
+<p>Firstly, we choose Artificial Intelligence: https://ai.stackexchange.com/ from StackExchange site, which has 12,000 questions and 12,000 answers. Secondly, we download the forms related to the user profile and post summary of the ai.stackexchange website, which consists of 8 xml files including “Badges”, “Comments”, “PostHistory”, “PostLinks”, “Posts”, “Tags”, “Users” and “Votes”. Thirdly, we need to convert the xml files to CSV format and then read the contents of the csv file. Then, we will then analyze the data based on the specific data situation of each form to understand the ai domain, user characteristics and concerns, etc. In the following, we generate the csv file from the xml file.</p>
+<div id="b56199d4" class="cell" data-execution_count="334">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> xml.etree.ElementTree <span class="im">as</span> ET</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> os</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> convert_xml_to_csv(input_file, output_file):</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Check if the input XML file exists</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="kw">not</span> os.path.exists(input_file):</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="ss">f"Error: The file </span><span class="sc">{</span>input_file<span class="sc">}</span><span class="ss"> does not exist."</span>)</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Parse XML file</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>    tree <span class="op">=</span> ET.parse(input_file)</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>    root <span class="op">=</span> tree.getroot()</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Extract data from XML and create a DataFrame</span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>    data <span class="op">=</span> []</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> item <span class="kw">in</span> root.findall(<span class="st">'.//row'</span>):</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>        row_data <span class="op">=</span> {}</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> attr <span class="kw">in</span> item.attrib:</span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>            row_data[attr] <span class="op">=</span> item.attrib[attr]</span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>        data.append(row_data)</span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Create DataFrame</span></span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>    df <span class="op">=</span> pd.DataFrame(data)</span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Write DataFrame to CSV file</span></span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>    df.to_csv(output_file, index<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"Conversion successful. Data saved to </span><span class="sc">{</span>output_file<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a><span class="co"># Example usage:</span></span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>input_files <span class="op">=</span> [</span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Badges.xml"</span>,</span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Comments.xml"</span>,</span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a>    <span class="st">"PostHistory.xml"</span>,</span>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a>    <span class="st">"PostLinks.xml"</span>,</span>
+<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Posts.xml"</span>,</span>
+<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Tags.xml"</span>,</span>
+<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Users.xml"</span>,</span>
+<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Votes.xml"</span></span>
+<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a>]</span>
+<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a>output_path <span class="op">=</span> <span class="vs">r'C:\Users\Maxmelon\Downloads\ai.stackexchange.com'</span></span>
+<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> input_file <span class="kw">in</span> input_files:</span>
+<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a>    input_path <span class="op">=</span> os.path.join(<span class="vs">r'C:\Users\Maxmelon\Downloads\ai.stackexchange.com'</span>, input_file)</span>
+<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a>    output_file <span class="op">=</span> os.path.join(output_path, os.path.splitext(input_file)[<span class="dv">0</span>] <span class="op">+</span> <span class="st">".csv"</span>)</span>
+<span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a>    convert_xml_to_csv(input_path, output_file)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Conversion successful. Data saved to C:\Users\Maxmelon\Downloads\ai.stackexchange.com\Badges.csv
+Conversion successful. Data saved to C:\Users\Maxmelon\Downloads\ai.stackexchange.com\Comments.csv
+Conversion successful. Data saved to C:\Users\Maxmelon\Downloads\ai.stackexchange.com\PostHistory.csv
+Conversion successful. Data saved to C:\Users\Maxmelon\Downloads\ai.stackexchange.com\PostLinks.csv
+Conversion successful. Data saved to C:\Users\Maxmelon\Downloads\ai.stackexchange.com\Posts.csv
+Conversion successful. Data saved to C:\Users\Maxmelon\Downloads\ai.stackexchange.com\Tags.csv
+Conversion successful. Data saved to C:\Users\Maxmelon\Downloads\ai.stackexchange.com\Users.csv
+Conversion successful. Data saved to C:\Users\Maxmelon\Downloads\ai.stackexchange.com\Votes.csv</code></pre>
+</div>
+</div>
+<div id="a88ca163" class="cell" data-execution_count="335">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Provide the correct file path with the .csv extension</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>Badges <span class="op">=</span> pd.read_csv(<span class="vs">r'C:\Users\Maxmelon\Downloads\ai.stackexchange.com\Badges.csv'</span>)</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>Badges.head(<span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="335">
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">Id</th>
+<th data-quarto-table-cell-role="th">UserId</th>
+<th data-quarto-table-cell-role="th">Name</th>
+<th data-quarto-table-cell-role="th">Date</th>
+<th data-quarto-table-cell-role="th">Class</th>
+<th data-quarto-table-cell-role="th">TagBased</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>1</td>
+<td>4</td>
+<td>Informed</td>
+<td>2016-08-02T15:38:29.913</td>
+<td>3</td>
+<td>False</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>2</td>
+<td>9</td>
+<td>Informed</td>
+<td>2016-08-02T15:39:20.227</td>
+<td>3</td>
+<td>False</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>3</td>
+<td>16</td>
+<td>Informed</td>
+<td>2016-08-02T15:39:28.290</td>
+<td>3</td>
+<td>False</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<p>Badges table includes Id, UserId, Name Date, Class, TagBased, we can know the user to get the situation of the badge, such as the time to get and the badge class such as Gold, Silver, Bronze.</p>
+<div id="98b86937" class="cell" data-execution_count="336">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Provide the correct file path with the .csv extension</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>Comments <span class="op">=</span> pd.read_csv(<span class="vs">r'C:\Users\Maxmelon\Downloads\ai.stackexchange.com\Comments.csv'</span>)</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>Comments.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="336">
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">Id</th>
+<th data-quarto-table-cell-role="th">PostId</th>
+<th data-quarto-table-cell-role="th">Score</th>
+<th data-quarto-table-cell-role="th">Text</th>
+<th data-quarto-table-cell-role="th">CreationDate</th>
+<th data-quarto-table-cell-role="th">UserId</th>
+<th data-quarto-table-cell-role="th">ContentLicense</th>
+<th data-quarto-table-cell-role="th">UserDisplayName</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>9</td>
+<td>22</td>
+<td>1</td>
+<td>I think the AI Box is actually a bad introduct...</td>
+<td>2016-08-02T16:00:04.297</td>
+<td>10.0</td>
+<td>CC BY-SA 3.0</td>
+<td>NaN</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>10</td>
+<td>15</td>
+<td>6</td>
+<td>Definitely requires a statistical approach wit...</td>
+<td>2016-08-02T16:01:10.020</td>
+<td>38.0</td>
+<td>CC BY-SA 3.0</td>
+<td>NaN</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>11</td>
+<td>22</td>
+<td>0</td>
+<td>Fair enough. I just happen to be more familia...</td>
+<td>2016-08-02T16:04:37.090</td>
+<td>33.0</td>
+<td>CC BY-SA 3.0</td>
+<td>NaN</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>14</td>
+<td>41</td>
+<td>1</td>
+<td>If by IQ you mean pattern-finding (which is ge...</td>
+<td>2016-08-02T16:14:28.373</td>
+<td>47.0</td>
+<td>CC BY-SA 3.0</td>
+<td>NaN</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>24</td>
+<td>45</td>
+<td>0</td>
+<td>Regarding Asimov's laws, AFAIK, [the zeroth la...</td>
+<td>2016-08-02T16:49:20.210</td>
+<td>71.0</td>
+<td>CC BY-SA 3.0</td>
+<td>NaN</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<p>Comments table includes Id, PostId, Score, Text, CreationDate, UserId, ContentLicense, UserDisplayName, we can know the content of the comments, score, who rated it and when it was rated.</p>
+<div id="51ba8df5" class="cell" data-execution_count="337">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Provide the correct file path with the .csv extension</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>PostHistory <span class="op">=</span> pd.read_csv(<span class="vs">r'C:\Users\Maxmelon\Downloads\ai.stackexchange.com\PostHistory.csv'</span>)</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>PostHistory.head(<span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="337">
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">Id</th>
+<th data-quarto-table-cell-role="th">PostHistoryTypeId</th>
+<th data-quarto-table-cell-role="th">PostId</th>
+<th data-quarto-table-cell-role="th">RevisionGUID</th>
+<th data-quarto-table-cell-role="th">CreationDate</th>
+<th data-quarto-table-cell-role="th">UserId</th>
+<th data-quarto-table-cell-role="th">Text</th>
+<th data-quarto-table-cell-role="th">ContentLicense</th>
+<th data-quarto-table-cell-role="th">Comment</th>
+<th data-quarto-table-cell-role="th">UserDisplayName</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>1</td>
+<td>2</td>
+<td>1</td>
+<td>acd11026-43b5-4640-a6dd-dfff1749f5b5</td>
+<td>2016-08-02T15:39:14.947</td>
+<td>8.0</td>
+<td>What "backprop" does it mean? I've Googled it,...</td>
+<td>CC BY-SA 3.0</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>2</td>
+<td>1</td>
+<td>1</td>
+<td>acd11026-43b5-4640-a6dd-dfff1749f5b5</td>
+<td>2016-08-02T15:39:14.947</td>
+<td>8.0</td>
+<td>What is the "backprop"?</td>
+<td>CC BY-SA 3.0</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>3</td>
+<td>3</td>
+<td>1</td>
+<td>acd11026-43b5-4640-a6dd-dfff1749f5b5</td>
+<td>2016-08-02T15:39:14.947</td>
+<td>8.0</td>
+<td>&lt;deep-network&gt;</td>
+<td>CC BY-SA 3.0</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<p>PostHistory table includes Id, PostHistoryTypeId, PostId, RevisionGUID, CreationDate, UserId, Text, ContentLicense, Comment, UserDisplayName, we can know the creation time of the Post, the type, the content and so on.</p>
+<div id="4b412231" class="cell" data-execution_count="338">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Provide the correct file path with the .csv extension</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>PostLinks <span class="op">=</span> pd.read_csv(<span class="vs">r'C:\Users\Maxmelon\Downloads\ai.stackexchange.com\PostLinks.csv'</span>)</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>PostLinks.head(<span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="338">
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">Id</th>
+<th data-quarto-table-cell-role="th">CreationDate</th>
+<th data-quarto-table-cell-role="th">PostId</th>
+<th data-quarto-table-cell-role="th">RelatedPostId</th>
+<th data-quarto-table-cell-role="th">LinkTypeId</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>103</td>
+<td>2016-08-02T19:22:20.577</td>
+<td>118</td>
+<td>10</td>
+<td>1</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>136</td>
+<td>2016-08-02T21:18:16.763</td>
+<td>140</td>
+<td>36</td>
+<td>1</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>179</td>
+<td>2016-08-03T05:15:39.443</td>
+<td>179</td>
+<td>26</td>
+<td>1</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<p>PostLinks table includes Id, CreationDate, PostId, RelatedPostId LinkTypeId, we can know the relationship between post and post.</p>
+<div id="954f783f" class="cell" data-execution_count="339">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Provide the correct file path with the .csv extension</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>Posts <span class="op">=</span> pd.read_csv(<span class="vs">r'C:\Users\Maxmelon\Downloads\ai.stackexchange.com\Posts.csv'</span>)</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>Posts.head(<span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="339">
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">Id</th>
+<th data-quarto-table-cell-role="th">PostTypeId</th>
+<th data-quarto-table-cell-role="th">AcceptedAnswerId</th>
+<th data-quarto-table-cell-role="th">CreationDate</th>
+<th data-quarto-table-cell-role="th">Score</th>
+<th data-quarto-table-cell-role="th">ViewCount</th>
+<th data-quarto-table-cell-role="th">Body</th>
+<th data-quarto-table-cell-role="th">OwnerUserId</th>
+<th data-quarto-table-cell-role="th">LastEditorUserId</th>
+<th data-quarto-table-cell-role="th">LastEditDate</th>
+<th data-quarto-table-cell-role="th">...</th>
+<th data-quarto-table-cell-role="th">Tags</th>
+<th data-quarto-table-cell-role="th">AnswerCount</th>
+<th data-quarto-table-cell-role="th">CommentCount</th>
+<th data-quarto-table-cell-role="th">ContentLicense</th>
+<th data-quarto-table-cell-role="th">ParentId</th>
+<th data-quarto-table-cell-role="th">ClosedDate</th>
+<th data-quarto-table-cell-role="th">FavoriteCount</th>
+<th data-quarto-table-cell-role="th">CommunityOwnedDate</th>
+<th data-quarto-table-cell-role="th">LastEditorDisplayName</th>
+<th data-quarto-table-cell-role="th">OwnerDisplayName</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>1</td>
+<td>1</td>
+<td>3.0</td>
+<td>2016-08-02T15:39:14.947</td>
+<td>11</td>
+<td>819.0</td>
+<td>&lt;p&gt;What does "backprop" mean? Is the "backprop...</td>
+<td>8.0</td>
+<td>2444.0</td>
+<td>2019-11-16T17:56:22.093</td>
+<td>...</td>
+<td>&lt;neural-networks&gt;&lt;backpropagation&gt;&lt;terminology...</td>
+<td>5.0</td>
+<td>0</td>
+<td>CC BY-SA 4.0</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>2</td>
+<td>1</td>
+<td>9.0</td>
+<td>2016-08-02T15:40:20.623</td>
+<td>14</td>
+<td>1194.0</td>
+<td>&lt;p&gt;Does increasing the noise in data help to i...</td>
+<td>8.0</td>
+<td>2444.0</td>
+<td>2019-02-23T22:36:19.090</td>
+<td>...</td>
+<td>&lt;neural-networks&gt;&lt;machine-learning&gt;&lt;statistica...</td>
+<td>3.0</td>
+<td>0</td>
+<td>CC BY-SA 4.0</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>3</td>
+<td>2</td>
+<td>NaN</td>
+<td>2016-08-02T15:40:24.820</td>
+<td>15</td>
+<td>NaN</td>
+<td>&lt;p&gt;"Backprop" is the same as "backpropagation"...</td>
+<td>4.0</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>...</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>0</td>
+<td>CC BY-SA 3.0</td>
+<td>1.0</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+</tbody>
+</table>
+
+<p>3 rows × 22 columns</p>
+</div>
+</div>
+</div>
+<p>Posts table includes Id, PostTypeId, AcceptedAnswerId, CreationDate Score, ViewCount, Body, OwnerUserId, LastEditorUserId, LastEditDate, Tags, AnswerCount, CommentCount, ContentLicense, ParentId, ClosedDate, FavoriteCount, CommunityOwnedDate,LastEditorDisplayName, OwnerDisplayName, LastEditorDisplayName, OwnerDisplayName, we can know the content of the post, creation time, score, number of views, number of answers, number of ratings, tag content.</p>
+<div id="14ef5575" class="cell" data-execution_count="340">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Provide the correct file path with the .csv extension</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>Tags <span class="op">=</span> pd.read_csv(<span class="vs">r'C:\Users\Maxmelon\Downloads\ai.stackexchange.com\Tags.csv'</span>)</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>Tags.head(<span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="340">
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">Id</th>
+<th data-quarto-table-cell-role="th">TagName</th>
+<th data-quarto-table-cell-role="th">Count</th>
+<th data-quarto-table-cell-role="th">ExcerptPostId</th>
+<th data-quarto-table-cell-role="th">WikiPostId</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>2</td>
+<td>generalization</td>
+<td>34</td>
+<td>17536.0</td>
+<td>17535.0</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>4</td>
+<td>neurons</td>
+<td>26</td>
+<td>6022.0</td>
+<td>6021.0</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>8</td>
+<td>intelligent-agent</td>
+<td>66</td>
+<td>1765.0</td>
+<td>1764.0</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<p>Tags table includes Id, TagName, Count, ExcerptPostId, WikiPostId, we can know the name of the tag and the number.</p>
+<div id="db22672c" class="cell" data-execution_count="341">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Provide the correct file path with the .csv extension</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>Users <span class="op">=</span> pd.read_csv(<span class="vs">r'C:\Users\Maxmelon\Downloads\ai.stackexchange.com\Users.csv'</span>)</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>Users.head(<span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="341">
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">Id</th>
+<th data-quarto-table-cell-role="th">Reputation</th>
+<th data-quarto-table-cell-role="th">CreationDate</th>
+<th data-quarto-table-cell-role="th">DisplayName</th>
+<th data-quarto-table-cell-role="th">LastAccessDate</th>
+<th data-quarto-table-cell-role="th">Location</th>
+<th data-quarto-table-cell-role="th">AboutMe</th>
+<th data-quarto-table-cell-role="th">Views</th>
+<th data-quarto-table-cell-role="th">UpVotes</th>
+<th data-quarto-table-cell-role="th">DownVotes</th>
+<th data-quarto-table-cell-role="th">AccountId</th>
+<th data-quarto-table-cell-role="th">WebsiteUrl</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>-1</td>
+<td>1</td>
+<td>2016-08-02T00:14:10.580</td>
+<td>Community</td>
+<td>2016-08-02T00:14:10.580</td>
+<td>on the server farm</td>
+<td>&lt;p&gt;Hi, I'm not really a person.&lt;/p&gt;\r\n&lt;p&gt;I'm ...</td>
+<td>193</td>
+<td>1490</td>
+<td>1954</td>
+<td>-1.0</td>
+<td>NaN</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>1</td>
+<td>101</td>
+<td>2016-08-02T15:36:45.333</td>
+<td>Adam Lear</td>
+<td>2023-11-20T23:00:38.940</td>
+<td>New York, NY</td>
+<td>\n&lt;p&gt;Developer at Stack Overflow focusing on p...</td>
+<td>208</td>
+<td>0</td>
+<td>0</td>
+<td>37099.0</td>
+<td>NaN</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>2</td>
+<td>101</td>
+<td>2016-08-02T15:36:48.397</td>
+<td>Nick Craver</td>
+<td>2016-11-30T22:09:22.300</td>
+<td>Winston-Salem, NC</td>
+<td>&lt;p&gt;I am a Principal Software Engineer at Micro...</td>
+<td>11</td>
+<td>0</td>
+<td>0</td>
+<td>7598.0</td>
+<td>https://nickcraver.com/blog/</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<p>Users table includes Id, Reputation, CreationDate, DisplayName, LastAccessDate, Location, AboutMe Views, UpVotes, DownVotes, AccountId, WebsiteUrl, we can know the user’s profile, including the user’s location, self-introduction, creation time and so on.</p>
+<div id="ccf5e614" class="cell" data-execution_count="342">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Provide the correct file path with the .csv extension</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>Votes <span class="op">=</span> pd.read_csv(<span class="vs">r'C:\Users\Maxmelon\Downloads\ai.stackexchange.com\Votes.csv'</span>)</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>Votes.head(<span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="342">
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">Id</th>
+<th data-quarto-table-cell-role="th">PostId</th>
+<th data-quarto-table-cell-role="th">VoteTypeId</th>
+<th data-quarto-table-cell-role="th">CreationDate</th>
+<th data-quarto-table-cell-role="th">UserId</th>
+<th data-quarto-table-cell-role="th">BountyAmount</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>1</td>
+<td>1</td>
+<td>2</td>
+<td>2016-08-02T00:00:00.000</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>2</td>
+<td>1</td>
+<td>2</td>
+<td>2016-08-02T00:00:00.000</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>3</td>
+<td>1</td>
+<td>2</td>
+<td>2016-08-02T00:00:00.000</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<p>Votes table includes Id, PostId, VoteTypeId, CreationDate, UserId, BountyAmount, we can know the creator, vote type, creation time and so on.<br>
+We have a general understanding of the eight tables on the site’s users and postings, and below we will analyze whether the types of postings have changed over time, the characteristics of the geographic distribution of users, the approximate occupations of users, the frequency of the occurrence of some keywords in the user’s postings, and the changes in the post tags over the years</p>
+</section>
+<section id="data-analysis-and-visualization" class="level3">
+<h3 class="anchored" data-anchor-id="data-analysis-and-visualization">Data Analysis and Visualization</h3>
+<p>Firstly we want to know the geographical distribution of the users, we will find out the country information by regular expression through the Location field of the Users table and then draw a map to represent the distribution of the users.</p>
+<div id="b8042787" class="cell" data-execution_count="343">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> geopy.geocoders <span class="im">import</span> Nominatim</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> re</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="dbab50ed" class="cell" data-execution_count="354">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Drop rows where Location is NaN</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>Users_cleaned <span class="op">=</span> Users.dropna(subset<span class="op">=</span>[<span class="st">'Location'</span>]).copy()</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Create 'Country' column in Users</span></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>Users_cleaned[<span class="st">'Country'</span>] <span class="op">=</span> Users_cleaned[<span class="st">'Location'</span>].<span class="bu">apply</span>(</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>    <span class="kw">lambda</span> x: re.findall(<span class="vs">r'[^,]+$'</span>, <span class="bu">str</span>(x).strip())[<span class="dv">0</span>].strip() <span class="cf">if</span> <span class="st">','</span> <span class="kw">in</span> <span class="bu">str</span>(x) <span class="kw">and</span> re.findall(<span class="vs">r'[^,]+$'</span>, <span class="bu">str</span>(x).strip()) <span class="cf">else</span> <span class="bu">str</span>(x).strip() <span class="cf">if</span> <span class="bu">str</span>(x).strip() <span class="cf">else</span> <span class="va">None</span></span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Drop rows where 'Country' is None</span></span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>Users_country <span class="op">=</span> Users_cleaned.dropna(subset<span class="op">=</span>[<span class="st">'Country'</span>])</span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Keep only required columns</span></span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a>Users_country <span class="op">=</span> Users_country[[<span class="st">'AccountId'</span>, <span class="st">'Location'</span>, <span class="st">'Country'</span>]]</span>
+<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Print the shape and first 10 rows of the DataFrame</span></span>
+<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(Users_country.shape)</span>
+<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a>Users_country.head(<span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>(26864, 3)</code></pre>
+</div>
+<div class="cell-output cell-output-display" data-execution_count="354">
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">AccountId</th>
+<th data-quarto-table-cell-role="th">Location</th>
+<th data-quarto-table-cell-role="th">Country</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>-1.0</td>
+<td>on the server farm</td>
+<td>on the server farm</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>37099.0</td>
+<td>New York, NY</td>
+<td>NY</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>7598.0</td>
+<td>Winston-Salem, NC</td>
+<td>NC</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>2.0</td>
+<td>Corvallis, OR, United States</td>
+<td>United States</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">5</td>
+<td>8057826.0</td>
+<td>Mankato, MN, United States</td>
+<td>United States</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">6</td>
+<td>3393940.0</td>
+<td>Philadelphia, PA</td>
+<td>PA</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">7</td>
+<td>6824864.0</td>
+<td>Plymouth, United Kingdom</td>
+<td>United Kingdom</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">8</td>
+<td>22370.0</td>
+<td>London, UK</td>
+<td>UK</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">9</td>
+<td>7263447.0</td>
+<td>United Kingdon</td>
+<td>United Kingdon</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">10</td>
+<td>555192.0</td>
+<td>Berkeley, CA</td>
+<td>CA</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<div id="ec1c52fc" class="cell" data-execution_count="355">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Replace country names before counting</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>Users_country[<span class="st">'Country'</span>] <span class="op">=</span> Users_country[<span class="st">'Country'</span>].replace({<span class="st">'USA'</span>: <span class="st">'UNITED STATES'</span>, <span class="st">'UNITED STATES'</span>: <span class="st">'UNITED STATES'</span>,</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>                                                             <span class="st">'UK'</span>: <span class="st">'UNITED KINGDOM'</span>, <span class="st">'UNITED KINGDOM'</span>: <span class="st">'UNITED KINGDOM'</span>})</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate the number of users for each country</span></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>country_counts <span class="op">=</span> Users_country[<span class="st">'Country'</span>].value_counts().reset_index()</span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>country_counts.columns <span class="op">=</span> [<span class="st">'Country'</span>, <span class="st">'UserCount'</span>]</span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Sort the country_counts DataFrame in descending order based on the 'UserCount' column</span></span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>country_counts_sorted <span class="op">=</span> country_counts.sort_values(by<span class="op">=</span><span class="st">'UserCount'</span>, ascending<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Print the result</span></span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a>country_counts.head(<span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="355">
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">Country</th>
+<th data-quarto-table-cell-role="th">UserCount</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>India</td>
+<td>4012</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>UNITED STATES</td>
+<td>2089</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>United States</td>
+<td>1631</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>Germany</td>
+<td>1088</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>Canada</td>
+<td>807</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">5</td>
+<td>France</td>
+<td>660</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">6</td>
+<td>United Kingdom</td>
+<td>627</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">7</td>
+<td>UNITED KINGDOM</td>
+<td>549</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">8</td>
+<td>Australia</td>
+<td>468</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">9</td>
+<td>Pakistan</td>
+<td>353</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<div id="5af96cb1" class="cell" data-execution_count="356">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> geopandas <span class="im">as</span> gpd</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Read world map data</span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>world <span class="op">=</span> gpd.read_file(<span class="st">'C:/Users/Maxmelon/Downloads/ne_110m_admin_0_countries/ne_110m_admin_0_countries.shp'</span>)</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Merge data based on country names</span></span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>world_users <span class="op">=</span> world.merge(Users_distribution, left_on<span class="op">=</span><span class="st">'NAME'</span>, right_on<span class="op">=</span><span class="st">'Country'</span>, how<span class="op">=</span><span class="st">'left'</span>)</span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate the count of unmatched users</span></span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>unmatched_users <span class="op">=</span> Users_distribution[<span class="op">~</span>Users_distribution[<span class="st">'Country'</span>].isin(world_users[<span class="st">'NAME'</span>])]</span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>unmatched_count <span class="op">=</span> unmatched_users[<span class="st">'UserCount'</span>].<span class="bu">sum</span>() <span class="cf">if</span> <span class="kw">not</span> unmatched_users.empty <span class="cf">else</span> <span class="dv">0</span></span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot the map</span></span>
+<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(<span class="dv">1</span>, <span class="dv">1</span>, figsize<span class="op">=</span>(<span class="dv">15</span>, <span class="dv">10</span>))</span>
+<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a>world_users.plot(column<span class="op">=</span><span class="st">'UserCount'</span>, cmap<span class="op">=</span><span class="st">'OrRd'</span>, legend<span class="op">=</span><span class="va">True</span>, ax<span class="op">=</span>ax, missing_kwds<span class="op">=</span>{</span>
+<span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a>    <span class="st">"color"</span>: <span class="st">"lightgrey"</span>,</span>
+<span id="cb15-16"><a href="#cb15-16" aria-hidden="true" tabindex="-1"></a>    <span class="st">"edgecolor"</span>: <span class="st">"black"</span>,</span>
+<span id="cb15-17"><a href="#cb15-17" aria-hidden="true" tabindex="-1"></a>    <span class="st">"hatch"</span>: <span class="st">"///"</span>,</span>
+<span id="cb15-18"><a href="#cb15-18" aria-hidden="true" tabindex="-1"></a>    <span class="st">"label"</span>: <span class="st">"Missing values"</span>,</span>
+<span id="cb15-19"><a href="#cb15-19" aria-hidden="true" tabindex="-1"></a>})</span>
+<span id="cb15-20"><a href="#cb15-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-21"><a href="#cb15-21" aria-hidden="true" tabindex="-1"></a>ax.set_axis_off()</span>
+<span id="cb15-22"><a href="#cb15-22" aria-hidden="true" tabindex="-1"></a>ax.set_title(<span class="ss">f'World Map of User Distribution</span><span class="ch">\n</span><span class="ss">(Unmatched User Count: </span><span class="sc">{</span>unmatched_count<span class="sc">}</span><span class="ss">)'</span>)</span>
+<span id="cb15-23"><a href="#cb15-23" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Task8_files/figure-html/cell-14-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>From the above graph we see that very many users are from India, USA followed by other countries like UK, Germany, Canada etc.<br>
+We also want to know the occupation of the users, in About me, there are many users mentioned their occupation, so we will match some keywords on the content of About me, mainly Developer, Programmer, student, etc., we can see whether the users who follow this website have any occupation experience or not.</p>
+<div id="9433130d" class="cell" data-execution_count="357">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Drop rows with NaN values in the AboutMe column</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>Users_statement <span class="op">=</span> Users.dropna(subset<span class="op">=</span>[<span class="st">'AboutMe'</span>]).copy()</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Use regular expression to extract the sentence containing "I am" or "I'm" up to the nearest period</span></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>Users_statement[<span class="st">'I_am_statement'</span>] <span class="op">=</span> Users_statement[<span class="st">'AboutMe'</span>].<span class="bu">str</span>.extract(<span class="vs">r'((I am|I\'m).*?\.).*'</span>, flags<span class="op">=</span>re.IGNORECASE)[<span class="dv">0</span>]</span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Drop rows where I_am_statement is NaN</span></span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>Users_statement <span class="op">=</span> Users_statement.dropna(subset<span class="op">=</span>[<span class="st">'I_am_statement'</span>]).copy()</span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Print the extracted results</span></span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(Users_statement.shape)</span>
+<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a>Users_statement[[<span class="st">'AboutMe'</span>, <span class="st">'I_am_statement'</span>]].head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>(3913, 13)</code></pre>
+</div>
+<div class="cell-output cell-output-display" data-execution_count="357">
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">AboutMe</th>
+<th data-quarto-table-cell-role="th">I_am_statement</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>&lt;p&gt;Hi, I'm not really a person.&lt;/p&gt;\r\n&lt;p&gt;I'm ...</td>
+<td>I'm not really a person.</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">2</td>
+<td>&lt;p&gt;I am a Principal Software Engineer at Micro...</td>
+<td>I am a Principal Software Engineer at Microsof...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">8</td>
+<td>&lt;p&gt;I'm a DevOps guy, also IT engineer programm...</td>
+<td>I'm a DevOps guy, also IT engineer programming...</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">13</td>
+<td>&lt;p&gt;I am a undergraduate computer engineering s...</td>
+<td>I am a undergraduate computer engineering stud...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">15</td>
+<td>&lt;p&gt;I'm John Slegers, full stack web developer ...</td>
+<td>I'm John Slegers, full stack web developer fro...</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<div id="c81262c0" class="cell" data-execution_count="358">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Function to extract career information based on specified conditions</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> extract_career(statement):</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Case 1: Engineer</span></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>    match_engineer <span class="op">=</span> re.search(<span class="vs">r'\b(\w+)\s+Engineer\b'</span>, statement, flags<span class="op">=</span>re.IGNORECASE)</span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> match_engineer:</span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="st">'Engineer'</span></span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Case 2: Developer</span></span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a>    match_developer <span class="op">=</span> re.search(<span class="vs">r'\b(\w+)\s+Developer\b'</span>, statement, flags<span class="op">=</span>re.IGNORECASE)</span>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> match_developer:</span>
+<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="st">'Developer'</span></span>
+<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-13"><a href="#cb18-13" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Case 3: Student (including undergraduate, student, postgraduate, phd)</span></span>
+<span id="cb18-14"><a href="#cb18-14" aria-hidden="true" tabindex="-1"></a>    match_student <span class="op">=</span> re.search(<span class="vs">r'\b(?:undergraduate|student|postgraduate|Phd)\b'</span>, statement, flags<span class="op">=</span>re.IGNORECASE)</span>
+<span id="cb18-15"><a href="#cb18-15" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> match_student:</span>
+<span id="cb18-16"><a href="#cb18-16" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="st">'Student'</span></span>
+<span id="cb18-17"><a href="#cb18-17" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb18-18"><a href="#cb18-18" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Case 4: Graduate</span></span>
+<span id="cb18-19"><a href="#cb18-19" aria-hidden="true" tabindex="-1"></a>    match_graduate <span class="op">=</span> re.search(<span class="vs">r'\b(?:graduate)\b'</span>, statement, flags<span class="op">=</span>re.IGNORECASE)</span>
+<span id="cb18-20"><a href="#cb18-20" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> match_graduate:</span>
+<span id="cb18-21"><a href="#cb18-21" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="st">'Graduate'</span></span>
+<span id="cb18-22"><a href="#cb18-22" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb18-23"><a href="#cb18-23" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Case 5: Manager</span></span>
+<span id="cb18-24"><a href="#cb18-24" aria-hidden="true" tabindex="-1"></a>    match_manager <span class="op">=</span> re.search(<span class="vs">r'\b(\w+)\s+Manager\b'</span>, statement, flags<span class="op">=</span>re.IGNORECASE)</span>
+<span id="cb18-25"><a href="#cb18-25" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> match_manager:</span>
+<span id="cb18-26"><a href="#cb18-26" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="st">'Manager'</span></span>
+<span id="cb18-27"><a href="#cb18-27" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb18-28"><a href="#cb18-28" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Case 6: Scientist</span></span>
+<span id="cb18-29"><a href="#cb18-29" aria-hidden="true" tabindex="-1"></a>    match_scientist <span class="op">=</span> re.search(<span class="vs">r'\b(\w+)\s+Scientist\b'</span>, statement, flags<span class="op">=</span>re.IGNORECASE)</span>
+<span id="cb18-30"><a href="#cb18-30" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> match_scientist:</span>
+<span id="cb18-31"><a href="#cb18-31" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="st">'Scientist'</span></span>
+<span id="cb18-32"><a href="#cb18-32" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb18-33"><a href="#cb18-33" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Case 7: Programmer</span></span>
+<span id="cb18-34"><a href="#cb18-34" aria-hidden="true" tabindex="-1"></a>    match_programmer <span class="op">=</span> re.search(<span class="vs">r'\b(\w+)\s+Programmer\b'</span>, statement, flags<span class="op">=</span>re.IGNORECASE)</span>
+<span id="cb18-35"><a href="#cb18-35" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> match_programmer:</span>
+<span id="cb18-36"><a href="#cb18-36" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="st">'Programmer'</span></span>
+<span id="cb18-37"><a href="#cb18-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-38"><a href="#cb18-38" aria-hidden="true" tabindex="-1"></a>    <span class="co"># If none of the specified conditions match, return None</span></span>
+<span id="cb18-39"><a href="#cb18-39" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="va">None</span></span>
+<span id="cb18-40"><a href="#cb18-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-41"><a href="#cb18-41" aria-hidden="true" tabindex="-1"></a><span class="co"># Apply the function to create the 'Career' column</span></span>
+<span id="cb18-42"><a href="#cb18-42" aria-hidden="true" tabindex="-1"></a>Users_statement[<span class="st">'Career'</span>] <span class="op">=</span> Users_statement[<span class="st">'I_am_statement'</span>].<span class="bu">apply</span>(extract_career)</span>
+<span id="cb18-43"><a href="#cb18-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-44"><a href="#cb18-44" aria-hidden="true" tabindex="-1"></a><span class="co"># Print the updated results</span></span>
+<span id="cb18-45"><a href="#cb18-45" aria-hidden="true" tabindex="-1"></a>Users_statement[[<span class="st">'AboutMe'</span>, <span class="st">'I_am_statement'</span>, <span class="st">'Career'</span>]].head(<span class="dv">20</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="358">
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">AboutMe</th>
+<th data-quarto-table-cell-role="th">I_am_statement</th>
+<th data-quarto-table-cell-role="th">Career</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>&lt;p&gt;Hi, I'm not really a person.&lt;/p&gt;\r\n&lt;p&gt;I'm ...</td>
+<td>I'm not really a person.</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">2</td>
+<td>&lt;p&gt;I am a Principal Software Engineer at Micro...</td>
+<td>I am a Principal Software Engineer at Microsof...</td>
+<td>Engineer</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">8</td>
+<td>&lt;p&gt;I'm a DevOps guy, also IT engineer programm...</td>
+<td>I'm a DevOps guy, also IT engineer programming...</td>
+<td>Engineer</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">13</td>
+<td>&lt;p&gt;I am a undergraduate computer engineering s...</td>
+<td>I am a undergraduate computer engineering stud...</td>
+<td>Student</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">15</td>
+<td>&lt;p&gt;I'm John Slegers, full stack web developer ...</td>
+<td>I'm John Slegers, full stack web developer fro...</td>
+<td>Developer</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">20</td>
+<td>&lt;p&gt;&lt;strong&gt;BY DAY:&lt;/strong&gt; Jack of all trades...</td>
+<td>I am the main software person, so I need to ha...</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">23</td>
+<td>&lt;p&gt;developer, techie, nerd.... ex-DBRE at Stac...</td>
+<td>I'm not at my desk, I do CrossFit and run (a l...</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">24</td>
+<td>&lt;p&gt;Former &lt;a href="https://stackoverflow.blog/...</td>
+<td>I am a C# ASP.</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">25</td>
+<td>&lt;p&gt;I am an undergrad from India with great int...</td>
+<td>I am an undergrad from India with great intere...</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">28</td>
+<td>&lt;p&gt;I am a Dutch amateur mathematician currentl...</td>
+<td>I am a Dutch amateur mathematician currently i...</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">30</td>
+<td>&lt;p&gt;Well, fancy seeing you here!&lt;/p&gt;\n&lt;p&gt;I work...</td>
+<td>I'm writing about.</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">40</td>
+<td>&lt;p&gt;First the serious things: I love &lt;a href="h...</td>
+<td>I am a telecommunication engineer working as a...</td>
+<td>Engineer</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">46</td>
+<td>&lt;p&gt;I like maths, natural/theoretical science, ...</td>
+<td>I'm in the mood.</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">49</td>
+<td>&lt;p&gt;Ask Ubuntu moderator♦ and DevOps engineer.\...</td>
+<td>I'm using the character &amp;quot;Dregg Morriss&amp;qu...</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">58</td>
+<td>&lt;p&gt;&lt;strong&gt;I love to design...&lt;/strong&gt;&lt;/p&gt;\n\...</td>
+<td>I'm a Graphic Designer by day, Android OS deve...</td>
+<td>Developer</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">60</td>
+<td>&lt;p&gt;I am a Technical Success Manager (part of o...</td>
+<td>I am a Technical Success Manager (part of our ...</td>
+<td>Manager</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">62</td>
+<td>&lt;p&gt;&lt;a href="https://mvp.microsoft.com/en-us/Pu...</td>
+<td>I am good in these.</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">65</td>
+<td>&lt;p&gt;I support the Stack Exchange moderator stri...</td>
+<td>I'm available on &lt;a href="https://software.</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">78</td>
+<td>&lt;p&gt;I'm Vihan also known as Downgoat. I mainly ...</td>
+<td>I'm Vihan also known as Downgoat.</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">83</td>
+<td>&lt;p&gt;I'm interested in attending graduate school...</td>
+<td>I'm interested in attending graduate school in...</td>
+<td>Student</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<div id="13b22174" class="cell" data-execution_count="359">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate the count of 'None' in the 'Career' column</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>none_count <span class="op">=</span> Users_statement[<span class="st">'Career'</span>].isna().<span class="bu">sum</span>()</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Display the count</span></span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'Count of "None" in Career: </span><span class="sc">{</span>none_count<span class="sc">}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Count of "None" in Career: 2305</code></pre>
+</div>
+</div>
+<div id="71c73d13" class="cell" data-execution_count="360">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Remove rows with 'None' values in the 'Career' column</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>Users_statement_filtered <span class="op">=</span> Users_statement[Users_statement[<span class="st">'Career'</span>].notna()].copy()</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a new column 'CareerCategory' based on the specified criteria</span></span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>Users_statement_filtered[<span class="st">'CareerCategory'</span>] <span class="op">=</span> Users_statement_filtered[<span class="st">'Career'</span>].<span class="bu">apply</span>(</span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>    <span class="kw">lambda</span> career: <span class="st">'With Work Experience'</span> <span class="cf">if</span> career <span class="kw">in</span> [<span class="st">'Engineer'</span>, <span class="st">'Developer'</span>, <span class="st">'Manager'</span>, <span class="st">'Scientist'</span>, <span class="st">'Programmer'</span>]</span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span> <span class="st">'No Work Experience'</span> <span class="cf">if</span> career <span class="kw">in</span> [<span class="st">'Student'</span>, <span class="st">'Graduate'</span>]</span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span> <span class="va">None</span>  <span class="co"># You can adjust this based on your specific criteria</span></span>
+<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-11"><a href="#cb21-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a DataFrame with career counts and CareerCategory</span></span>
+<span id="cb21-12"><a href="#cb21-12" aria-hidden="true" tabindex="-1"></a>career_counts <span class="op">=</span> Users_statement_filtered.groupby([<span class="st">'CareerCategory'</span>, <span class="st">'Career'</span>]).size().reset_index(name<span class="op">=</span><span class="st">'Count'</span>)</span>
+<span id="cb21-13"><a href="#cb21-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-14"><a href="#cb21-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Sort the DataFrame by 'Count' column in descending order</span></span>
+<span id="cb21-15"><a href="#cb21-15" aria-hidden="true" tabindex="-1"></a>career_counts <span class="op">=</span> career_counts.sort_values(by<span class="op">=</span><span class="st">'Count'</span>, ascending<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb21-16"><a href="#cb21-16" aria-hidden="true" tabindex="-1"></a>career_counts.head(<span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="360">
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">CareerCategory</th>
+<th data-quarto-table-cell-role="th">Career</th>
+<th data-quarto-table-cell-role="th">Count</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">1</td>
+<td>No Work Experience</td>
+<td>Student</td>
+<td>488</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">2</td>
+<td>With Work Experience</td>
+<td>Developer</td>
+<td>451</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">3</td>
+<td>With Work Experience</td>
+<td>Engineer</td>
+<td>400</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">6</td>
+<td>With Work Experience</td>
+<td>Scientist</td>
+<td>109</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">5</td>
+<td>With Work Experience</td>
+<td>Programmer</td>
+<td>106</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">0</td>
+<td>No Work Experience</td>
+<td>Graduate</td>
+<td>33</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>With Work Experience</td>
+<td>Manager</td>
+<td>21</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<div id="f8ab1709" class="cell" data-execution_count="361">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> squarify <span class="im">import</span> normalize_sizes, squarify</span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> bokeh.plotting <span class="im">import</span> figure, show</span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> bokeh.transform <span class="im">import</span> factor_cmap</span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> bokeh.io <span class="im">import</span> output_notebook</span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>output_notebook()</span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> career_counts[[<span class="st">"CareerCategory"</span>, <span class="st">"Career"</span>, <span class="st">"Count"</span>]]</span>
+<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a>category <span class="op">=</span> (<span class="st">"With Work Experience"</span>, <span class="st">"No Work Experience"</span>)</span>
+<span id="cb22-11"><a href="#cb22-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-12"><a href="#cb22-12" aria-hidden="true" tabindex="-1"></a>count_by_career <span class="op">=</span> data.groupby([<span class="st">"CareerCategory"</span>, <span class="st">"Career"</span>]).<span class="bu">sum</span>(<span class="st">"Count"</span>)</span>
+<span id="cb22-13"><a href="#cb22-13" aria-hidden="true" tabindex="-1"></a>count_by_career <span class="op">=</span> count_by_career.sort_values(by<span class="op">=</span><span class="st">"Count"</span>).reset_index()</span>
+<span id="cb22-14"><a href="#cb22-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-15"><a href="#cb22-15" aria-hidden="true" tabindex="-1"></a>count_by_category <span class="op">=</span> count_by_career.groupby(<span class="st">"CareerCategory"</span>).<span class="bu">sum</span>(<span class="st">"Count"</span>).sort_values(by<span class="op">=</span><span class="st">"Count"</span>)</span>
+<span id="cb22-16"><a href="#cb22-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-17"><a href="#cb22-17" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> treemap(df, col, x, y, dx, dy, <span class="op">*</span>, N<span class="op">=</span><span class="dv">100</span>):</span>
+<span id="cb22-18"><a href="#cb22-18" aria-hidden="true" tabindex="-1"></a>    sub_df <span class="op">=</span> df.nlargest(N, col)</span>
+<span id="cb22-19"><a href="#cb22-19" aria-hidden="true" tabindex="-1"></a>    normed <span class="op">=</span> normalize_sizes(sub_df[col], dx, dy)</span>
+<span id="cb22-20"><a href="#cb22-20" aria-hidden="true" tabindex="-1"></a>    blocks <span class="op">=</span> squarify(normed, x, y, dx, dy)</span>
+<span id="cb22-21"><a href="#cb22-21" aria-hidden="true" tabindex="-1"></a>    blocks_df <span class="op">=</span> pd.DataFrame.from_dict(blocks).set_index(sub_df.index)</span>
+<span id="cb22-22"><a href="#cb22-22" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> sub_df.join(blocks_df, how<span class="op">=</span><span class="st">'left'</span>).reset_index()</span>
+<span id="cb22-23"><a href="#cb22-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-24"><a href="#cb22-24" aria-hidden="true" tabindex="-1"></a>x, y, w, h <span class="op">=</span> <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">600</span>, <span class="dv">400</span></span>
+<span id="cb22-25"><a href="#cb22-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-26"><a href="#cb22-26" aria-hidden="true" tabindex="-1"></a>blocks_by_category <span class="op">=</span> treemap(count_by_category, <span class="st">"Count"</span>, x, y, w, h)</span>
+<span id="cb22-27"><a href="#cb22-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-28"><a href="#cb22-28" aria-hidden="true" tabindex="-1"></a>dfs <span class="op">=</span> []</span>
+<span id="cb22-29"><a href="#cb22-29" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> index, (CareerCategory, Count, x, y, dx, dy) <span class="kw">in</span> blocks_by_category.iterrows():</span>
+<span id="cb22-30"><a href="#cb22-30" aria-hidden="true" tabindex="-1"></a>    df <span class="op">=</span>count_by_career[count_by_career.CareerCategory<span class="op">==</span>CareerCategory]</span>
+<span id="cb22-31"><a href="#cb22-31" aria-hidden="true" tabindex="-1"></a>    dfs.append(treemap(df, <span class="st">"Count"</span>, x, y, dx, dy, N<span class="op">=</span><span class="dv">10</span>))</span>
+<span id="cb22-32"><a href="#cb22-32" aria-hidden="true" tabindex="-1"></a>blocks <span class="op">=</span> pd.concat(dfs)</span>
+<span id="cb22-33"><a href="#cb22-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-34"><a href="#cb22-34" aria-hidden="true" tabindex="-1"></a>p <span class="op">=</span> figure(width<span class="op">=</span>w, height<span class="op">=</span>h, tooltips<span class="op">=</span><span class="st">"@Career"</span>, toolbar_location<span class="op">=</span><span class="va">None</span>,</span>
+<span id="cb22-35"><a href="#cb22-35" aria-hidden="true" tabindex="-1"></a>           x_axis_location<span class="op">=</span><span class="va">None</span>, y_axis_location<span class="op">=</span><span class="va">None</span>)</span>
+<span id="cb22-36"><a href="#cb22-36" aria-hidden="true" tabindex="-1"></a>p.x_range.range_padding <span class="op">=</span> p.y_range.range_padding <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb22-37"><a href="#cb22-37" aria-hidden="true" tabindex="-1"></a>p.grid.grid_line_color <span class="op">=</span> <span class="va">None</span></span>
+<span id="cb22-38"><a href="#cb22-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-39"><a href="#cb22-39" aria-hidden="true" tabindex="-1"></a>p.block(<span class="st">'x'</span>, <span class="st">'y'</span>, <span class="st">'dx'</span>, <span class="st">'dy'</span>, source<span class="op">=</span>blocks, line_width<span class="op">=</span><span class="dv">1</span>, line_color<span class="op">=</span><span class="st">"white"</span>,</span>
+<span id="cb22-40"><a href="#cb22-40" aria-hidden="true" tabindex="-1"></a>        fill_alpha<span class="op">=</span><span class="fl">0.8</span>, fill_color<span class="op">=</span>factor_cmap(<span class="st">"CareerCategory"</span>, <span class="st">"MediumContrast4"</span>, category))</span>
+<span id="cb22-41"><a href="#cb22-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-42"><a href="#cb22-42" aria-hidden="true" tabindex="-1"></a>p.text(<span class="st">'x'</span>, <span class="st">'y'</span>, x_offset<span class="op">=</span><span class="dv">2</span>, text<span class="op">=</span><span class="st">"CareerCategory"</span>, source<span class="op">=</span>blocks_by_category,</span>
+<span id="cb22-43"><a href="#cb22-43" aria-hidden="true" tabindex="-1"></a>       text_font_size<span class="op">=</span><span class="st">"14pt"</span>, text_color<span class="op">=</span><span class="st">"white"</span>)</span>
+<span id="cb22-44"><a href="#cb22-44" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-45"><a href="#cb22-45" aria-hidden="true" tabindex="-1"></a>blocks[<span class="st">"ytop"</span>] <span class="op">=</span> blocks.y <span class="op">+</span> blocks.dy</span>
+<span id="cb22-46"><a href="#cb22-46" aria-hidden="true" tabindex="-1"></a>p.text(<span class="st">'x'</span>, <span class="st">'ytop'</span>, x_offset<span class="op">=</span><span class="dv">2</span>, y_offset<span class="op">=</span><span class="dv">2</span>, text<span class="op">=</span><span class="st">"Career"</span>, source<span class="op">=</span>blocks,</span>
+<span id="cb22-47"><a href="#cb22-47" aria-hidden="true" tabindex="-1"></a>       text_font_size<span class="op">=</span><span class="st">"10pt"</span>, text_baseline<span class="op">=</span><span class="st">"top"</span>,</span>
+<span id="cb22-48"><a href="#cb22-48" aria-hidden="true" tabindex="-1"></a>       text_color<span class="op">=</span>factor_cmap(<span class="st">"CareerCategory"</span>, (<span class="st">"black"</span>, <span class="st">"white"</span>, <span class="st">"black"</span>, <span class="st">"white"</span>), category))</span>
+<span id="cb22-49"><a href="#cb22-49" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-50"><a href="#cb22-50" aria-hidden="true" tabindex="-1"></a>show(p)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<style>
+        .bk-notebook-logo {
+            display: block;
+            width: 20px;
+            height: 20px;
+            background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAALEgAACxIB0t1+/AAAABx0RVh0U29mdHdhcmUAQWRvYmUgRmlyZXdvcmtzIENTNui8sowAAAOkSURBVDiNjZRtaJVlGMd/1/08zzln5zjP1LWcU9N0NkN8m2CYjpgQYQXqSs0I84OLIC0hkEKoPtiH3gmKoiJDU7QpLgoLjLIQCpEsNJ1vqUOdO7ppbuec5+V+rj4ctwzd8IIbbi6u+8f1539dt3A78eXC7QizUF7gyV1fD1Yqg4JWz84yffhm0qkFqBogB9rM8tZdtwVsPUhWhGcFJngGeWrPzHm5oaMmkfEg1usvLFyc8jLRqDOMru7AyC8saQr7GG7f5fvDeH7Ej8CM66nIF+8yngt6HWaKh7k49Soy9nXurCi1o3qUbS3zWfrYeQDTB/Qj6kX6Ybhw4B+bOYoLKCC9H3Nu/leUTZ1JdRWkkn2ldcCamzrcf47KKXdAJllSlxAOkRgyHsGC/zRday5Qld9DyoM4/q/rUoy/CXh3jzOu3bHUVZeU+DEn8FInkPBFlu3+nW3Nw0mk6vCDiWg8CeJaxEwuHS3+z5RgY+YBR6V1Z1nxSOfoaPa4LASWxxdNp+VWTk7+4vzaou8v8PN+xo+KY2xsw6une2frhw05CTYOmQvsEhjhWjn0bmXPjpE1+kplmmkP3suftwTubK9Vq22qKmrBhpY4jvd5afdRA3wGjFAgcnTK2s4hY0/GPNIb0nErGMCRxWOOX64Z8RAC4oCXdklmEvcL8o0BfkNK4lUg9HTl+oPlQxdNo3Mg4Nv175e/1LDGzZen30MEjRUtmXSfiTVu1kK8W4txyV6BMKlbgk3lMwYCiusNy9fVfvvwMxv8Ynl6vxoByANLTWplvuj/nF9m2+PDtt1eiHPBr1oIfhCChQMBw6Aw0UulqTKZdfVvfG7VcfIqLG9bcldL/+pdWTLxLUy8Qq38heUIjh4XlzZxzQm19lLFlr8vdQ97rjZVOLf8nclzckbcD4wxXMidpX30sFd37Fv/GtwwhzhxGVAprjbg0gCAEeIgwCZyTV2Z1REEW8O4py0wsjeloKoMr6iCY6dP92H6Vw/oTyICIthibxjm/DfN9lVz8IqtqKYLUXfoKVMVQVVJOElGjrnnUt9T9wbgp8AyYKaGlqingHZU/uG2NTZSVqwHQTWkx9hxjkpWDaCg6Ckj5qebgBVbT3V3NNXMSiWSDdGV3hrtzla7J+duwPOToIg42ChPQOQjspnSlp1V+Gjdged7+8UN5CRAV7a5EdFNwCjEaBR27b3W890TE7g24NAP/mMDXRWrGoFPQI9ls/MWO2dWFAar/xcOIImbbpA3zgAAAABJRU5ErkJggg==);
+        }
+    </style>
+    <div>
+        <a href="https://bokeh.org" target="_blank" class="bk-notebook-logo"></a>
+        <span id="e75c0d1b-47f3-4507-a36a-c36ea40265cc">Loading BokehJS ...</span>
+    </div>
+</div>
+<div class="cell-output cell-output-display">
+<script type="application/javascript">
+(function(root) {
+  function now() {
+    return new Date();
+  }
+
+  const force = true;
+
+  if (typeof root._bokeh_onload_callbacks === "undefined" || force === true) {
+    root._bokeh_onload_callbacks = [];
+    root._bokeh_is_loading = undefined;
+  }
+
+const JS_MIME_TYPE = 'application/javascript';
+  const HTML_MIME_TYPE = 'text/html';
+  const EXEC_MIME_TYPE = 'application/vnd.bokehjs_exec.v0+json';
+  const CLASS_NAME = 'output_bokeh rendered_html';
+
+  /**
+   * Render data to the DOM node
+   */
+  function render(props, node) {
+    const script = document.createElement("script");
+    node.appendChild(script);
+  }
+
+  /**
+   * Handle when an output is cleared or removed
+   */
+  function handleClearOutput(event, handle) {
+    const cell = handle.cell;
+
+    const id = cell.output_area._bokeh_element_id;
+    const server_id = cell.output_area._bokeh_server_id;
+    // Clean up Bokeh references
+    if (id != null && id in Bokeh.index) {
+      Bokeh.index[id].model.document.clear();
+      delete Bokeh.index[id];
+    }
+
+    if (server_id !== undefined) {
+      // Clean up Bokeh references
+      const cmd_clean = "from bokeh.io.state import curstate; print(curstate().uuid_to_server['" + server_id + "'].get_sessions()[0].document.roots[0]._id)";
+      cell.notebook.kernel.execute(cmd_clean, {
+        iopub: {
+          output: function(msg) {
+            const id = msg.content.text.trim();
+            if (id in Bokeh.index) {
+              Bokeh.index[id].model.document.clear();
+              delete Bokeh.index[id];
+            }
+          }
+        }
+      });
+      // Destroy server and session
+      const cmd_destroy = "import bokeh.io.notebook as ion; ion.destroy_server('" + server_id + "')";
+      cell.notebook.kernel.execute(cmd_destroy);
+    }
+  }
+
+  /**
+   * Handle when a new output is added
+   */
+  function handleAddOutput(event, handle) {
+    const output_area = handle.output_area;
+    const output = handle.output;
+
+    // limit handleAddOutput to display_data with EXEC_MIME_TYPE content only
+    if ((output.output_type != "display_data") || (!Object.prototype.hasOwnProperty.call(output.data, EXEC_MIME_TYPE))) {
+      return
+    }
+
+    const toinsert = output_area.element.find("." + CLASS_NAME.split(' ')[0]);
+
+    if (output.metadata[EXEC_MIME_TYPE]["id"] !== undefined) {
+      toinsert[toinsert.length - 1].firstChild.textContent = output.data[JS_MIME_TYPE];
+      // store reference to embed id on output_area
+      output_area._bokeh_element_id = output.metadata[EXEC_MIME_TYPE]["id"];
+    }
+    if (output.metadata[EXEC_MIME_TYPE]["server_id"] !== undefined) {
+      const bk_div = document.createElement("div");
+      bk_div.innerHTML = output.data[HTML_MIME_TYPE];
+      const script_attrs = bk_div.children[0].attributes;
+      for (let i = 0; i < script_attrs.length; i++) {
+        toinsert[toinsert.length - 1].firstChild.setAttribute(script_attrs[i].name, script_attrs[i].value);
+        toinsert[toinsert.length - 1].firstChild.textContent = bk_div.children[0].textContent
+      }
+      // store reference to server id on output_area
+      output_area._bokeh_server_id = output.metadata[EXEC_MIME_TYPE]["server_id"];
+    }
+  }
+
+  function register_renderer(events, OutputArea) {
+
+    function append_mime(data, metadata, element) {
+      // create a DOM node to render to
+      const toinsert = this.create_output_subarea(
+        metadata,
+        CLASS_NAME,
+        EXEC_MIME_TYPE
+      );
+      this.keyboard_manager.register_events(toinsert);
+      // Render to node
+      const props = {data: data, metadata: metadata[EXEC_MIME_TYPE]};
+      render(props, toinsert[toinsert.length - 1]);
+      element.append(toinsert);
+      return toinsert
+    }
+
+    /* Handle when an output is cleared or removed */
+    events.on('clear_output.CodeCell', handleClearOutput);
+    events.on('delete.Cell', handleClearOutput);
+
+    /* Handle when a new output is added */
+    events.on('output_added.OutputArea', handleAddOutput);
+
+    /**
+     * Register the mime type and append_mime function with output_area
+     */
+    OutputArea.prototype.register_mime_type(EXEC_MIME_TYPE, append_mime, {
+      /* Is output safe? */
+      safe: true,
+      /* Index of renderer in `output_area.display_order` */
+      index: 0
+    });
+  }
+
+  // register the mime type if in Jupyter Notebook environment and previously unregistered
+  if (root.Jupyter !== undefined) {
+    const events = require('base/js/events');
+    const OutputArea = require('notebook/js/outputarea').OutputArea;
+
+    if (OutputArea.prototype.mime_types().indexOf(EXEC_MIME_TYPE) == -1) {
+      register_renderer(events, OutputArea);
+    }
+  }
+  if (typeof (root._bokeh_timeout) === "undefined" || force === true) {
+    root._bokeh_timeout = Date.now() + 5000;
+    root._bokeh_failed_load = false;
+  }
+
+  const NB_LOAD_WARNING = {'data': {'text/html':
+     "<div style='background-color: #fdd'>\n"+
+     "<p>\n"+
+     "BokehJS does not appear to have successfully loaded. If loading BokehJS from CDN, this \n"+
+     "may be due to a slow or bad network connection. Possible fixes:\n"+
+     "</p>\n"+
+     "<ul>\n"+
+     "<li>re-rerun `output_notebook()` to attempt to load from CDN again, or</li>\n"+
+     "<li>use INLINE resources instead, as so:</li>\n"+
+     "</ul>\n"+
+     "<code>\n"+
+     "from bokeh.resources import INLINE\n"+
+     "output_notebook(resources=INLINE)\n"+
+     "</code>\n"+
+     "</div>"}};
+
+  function display_loaded() {
+    const el = document.getElementById("e75c0d1b-47f3-4507-a36a-c36ea40265cc");
+    if (el != null) {
+      el.textContent = "BokehJS is loading...";
+    }
+    if (root.Bokeh !== undefined) {
+      if (el != null) {
+        el.textContent = "BokehJS " + root.Bokeh.version + " successfully loaded.";
+      }
+    } else if (Date.now() < root._bokeh_timeout) {
+      setTimeout(display_loaded, 100)
+    }
+  }
+
+  function run_callbacks() {
+    try {
+      root._bokeh_onload_callbacks.forEach(function(callback) {
+        if (callback != null)
+          callback();
+      });
+    } finally {
+      delete root._bokeh_onload_callbacks
+    }
+    console.debug("Bokeh: all callbacks have finished");
+  }
+
+  function load_libs(css_urls, js_urls, callback) {
+    if (css_urls == null) css_urls = [];
+    if (js_urls == null) js_urls = [];
+
+    root._bokeh_onload_callbacks.push(callback);
+    if (root._bokeh_is_loading > 0) {
+      console.debug("Bokeh: BokehJS is being loaded, scheduling callback at", now());
+      return null;
+    }
+    if (js_urls == null || js_urls.length === 0) {
+      run_callbacks();
+      return null;
+    }
+    console.debug("Bokeh: BokehJS not loaded, scheduling load and callback at", now());
+    root._bokeh_is_loading = css_urls.length + js_urls.length;
+
+    function on_load() {
+      root._bokeh_is_loading--;
+      if (root._bokeh_is_loading === 0) {
+        console.debug("Bokeh: all BokehJS libraries/stylesheets loaded");
+        run_callbacks()
+      }
+    }
+
+    function on_error(url) {
+      console.error("failed to load " + url);
+    }
+
+    for (let i = 0; i < css_urls.length; i++) {
+      const url = css_urls[i];
+      const element = document.createElement("link");
+      element.onload = on_load;
+      element.onerror = on_error.bind(null, url);
+      element.rel = "stylesheet";
+      element.type = "text/css";
+      element.href = url;
+      console.debug("Bokeh: injecting link tag for BokehJS stylesheet: ", url);
+      document.body.appendChild(element);
+    }
+
+    for (let i = 0; i < js_urls.length; i++) {
+      const url = js_urls[i];
+      const element = document.createElement('script');
+      element.onload = on_load;
+      element.onerror = on_error.bind(null, url);
+      element.async = false;
+      element.src = url;
+      console.debug("Bokeh: injecting script tag for BokehJS library: ", url);
+      document.head.appendChild(element);
+    }
+  };
+
+  function inject_raw_css(css) {
+    const element = document.createElement("style");
+    element.appendChild(document.createTextNode(css));
+    document.body.appendChild(element);
+  }
+
+  const js_urls = ["https://cdn.bokeh.org/bokeh/release/bokeh-3.2.1.min.js", "https://cdn.bokeh.org/bokeh/release/bokeh-gl-3.2.1.min.js", "https://cdn.bokeh.org/bokeh/release/bokeh-widgets-3.2.1.min.js", "https://cdn.bokeh.org/bokeh/release/bokeh-tables-3.2.1.min.js", "https://cdn.bokeh.org/bokeh/release/bokeh-mathjax-3.2.1.min.js"];
+  const css_urls = [];
+
+  const inline_js = [    function(Bokeh) {
+      Bokeh.set_log_level("info");
+    },
+function(Bokeh) {
+    }
+  ];
+
+  function run_inline_js() {
+    if (root.Bokeh !== undefined || force === true) {
+          for (let i = 0; i < inline_js.length; i++) {
+      inline_js[i].call(root, root.Bokeh);
+    }
+if (force === true) {
+        display_loaded();
+      }} else if (Date.now() < root._bokeh_timeout) {
+      setTimeout(run_inline_js, 100);
+    } else if (!root._bokeh_failed_load) {
+      console.log("Bokeh: BokehJS failed to load within specified timeout.");
+      root._bokeh_failed_load = true;
+    } else if (force !== true) {
+      const cell = $(document.getElementById("e75c0d1b-47f3-4507-a36a-c36ea40265cc")).parents('.cell').data().cell;
+      cell.output_area.append_execute_result(NB_LOAD_WARNING)
+    }
+  }
+
+  if (root._bokeh_is_loading === 0) {
+    console.debug("Bokeh: BokehJS loaded, going straight to plotting");
+    run_inline_js();
+  } else {
+    load_libs(css_urls, js_urls, function() {
+      console.debug("Bokeh: BokehJS plotting callback run at", now());
+      run_inline_js();
+    });
+  }
+}(window));
+</script>
+</div>
+<div class="cell-output cell-output-display">
+
+  <div id="d793e019-3cac-41e5-8847-8bce81e8ca34" data-root-id="p2864" style="display: contents;"></div>
+</div>
+<div class="cell-output cell-output-display">
+<script type="application/javascript">
+(function(root) {
+  function embed_document(root) {
+  const docs_json = {"b9bcd18b-449f-4cc9-b74a-deaa45436112":{"version":"3.2.1","title":"Bokeh Application","roots":[{"type":"object","name":"Figure","id":"p2864","attributes":{"height":400,"x_range":{"type":"object","name":"DataRange1d","id":"p2865","attributes":{"range_padding":0}},"y_range":{"type":"object","name":"DataRange1d","id":"p2866","attributes":{"range_padding":0}},"x_scale":{"type":"object","name":"LinearScale","id":"p2873"},"y_scale":{"type":"object","name":"LinearScale","id":"p2874"},"title":{"type":"object","name":"Title","id":"p2871"},"renderers":[{"type":"object","name":"GlyphRenderer","id":"p2903","attributes":{"data_source":{"type":"object","name":"ColumnDataSource","id":"p2894","attributes":{"selected":{"type":"object","name":"Selection","id":"p2895","attributes":{"indices":[],"line_indices":[]}},"selection_policy":{"type":"object","name":"UnionRenderers","id":"p2896"},"data":{"type":"map","entries":[["level_0",{"type":"ndarray","array":{"type":"bytes","data":"AAAAAAEAAAACAAAAAwAAAAQAAAAAAAAAAQAAAA=="},"shape":[7],"dtype":"int32","order":"little"}],["index",{"type":"ndarray","array":{"type":"bytes","data":"BQAAAAQAAAADAAAAAgAAAAAAAAAGAAAAAQAAAA=="},"shape":[7],"dtype":"int32","order":"little"}],["CareerCategory",{"type":"ndarray","array":["With Work Experience","With Work Experience","With Work Experience","With Work Experience","With Work Experience","No Work Experience","No Work Experience"],"shape":[7],"dtype":"object","order":"little"}],["Career",{"type":"ndarray","array":["Developer","Engineer","Scientist","Programmer","Manager","Student","Graduate"],"shape":[7],"dtype":"object","order":"little"}],["Count",{"type":"ndarray","array":{"type":"bytes","data":"wwEAAJABAABtAAAAagAAABUAAADoAQAAIQAAAA=="},"shape":[7],"dtype":"int32","order":"little"}],["x",{"type":"ndarray","array":{"type":"bytes","data":"AAAAAAAAAAAAAAAAAAAAALRb+NWY2HNAtFv41ZjYc0C0W/jVmNhzQDq7hV+NWXlAOruFX41ZeUA="},"shape":[7],"dtype":"float64","order":"little"}],["y",{"type":"ndarray","array":{"type":"bytes","data":"AAAAAAAAAABzW/B7jH9qQAAAAAAAAAAAFUHDSd0XZ0Duy2MrgsZ2QAAAAAAAAAAANrsrL6Bqd0A="},"shape":[7],"dtype":"float64","order":"little"}],["dx",{"type":"ndarray","array":{"type":"bytes","data":"tFv41ZjYc0C0W/jVmNhzQBh+NSbSA1ZAGH41JtIDVkASfjUm0gNWQIyJ9EDlTGhAhYn0QOVMaEA="},"shape":[7],"dtype":"float64","order":"little"}],["dy",{"type":"ndarray","array":{"type":"bytes","data":"c1vwe4x/akCNpA+Ec4BnQBVBw0ndF2dAx1YEDSd1ZkCQoOGk7stBQDa7Ky+gandAr0xEDf1VOUA="},"shape":[7],"dtype":"float64","order":"little"}]]}}},"view":{"type":"object","name":"CDSView","id":"p2904","attributes":{"filter":{"type":"object","name":"AllIndices","id":"p2905"}}},"glyph":{"type":"object","name":"Block","id":"p2900","attributes":{"x":{"type":"field","field":"x"},"y":{"type":"field","field":"y"},"width":{"type":"field","field":"dx"},"height":{"type":"field","field":"dy"},"line_color":{"type":"value","value":"white"},"fill_color":{"type":"field","field":"CareerCategory","transform":{"type":"object","name":"CategoricalColorMapper","id":"p2893","attributes":{"palette":["#6699CC","#004488","#EECC66","#994455"],"factors":["With Work Experience","No Work Experience"]}}},"fill_alpha":{"type":"value","value":0.8}}},"nonselection_glyph":{"type":"object","name":"Block","id":"p2901","attributes":{"x":{"type":"field","field":"x"},"y":{"type":"field","field":"y"},"width":{"type":"field","field":"dx"},"height":{"type":"field","field":"dy"},"line_color":{"type":"value","value":"white"},"line_alpha":{"type":"value","value":0.1},"fill_color":{"type":"field","field":"CareerCategory","transform":{"id":"p2893"}},"fill_alpha":{"type":"value","value":0.1},"hatch_alpha":{"type":"value","value":0.1}}},"muted_glyph":{"type":"object","name":"Block","id":"p2902","attributes":{"x":{"type":"field","field":"x"},"y":{"type":"field","field":"y"},"width":{"type":"field","field":"dx"},"height":{"type":"field","field":"dy"},"line_color":{"type":"value","value":"white"},"line_alpha":{"type":"value","value":0.2},"fill_color":{"type":"field","field":"CareerCategory","transform":{"id":"p2893"}},"fill_alpha":{"type":"value","value":0.2},"hatch_alpha":{"type":"value","value":0.2}}}}},{"type":"object","name":"GlyphRenderer","id":"p2915","attributes":{"data_source":{"type":"object","name":"ColumnDataSource","id":"p2906","attributes":{"selected":{"type":"object","name":"Selection","id":"p2907","attributes":{"indices":[],"line_indices":[]}},"selection_policy":{"type":"object","name":"UnionRenderers","id":"p2908"},"data":{"type":"map","entries":[["index",{"type":"ndarray","array":{"type":"bytes","data":"AAAAAAEAAAA="},"shape":[2],"dtype":"int32","order":"little"}],["CareerCategory",{"type":"ndarray","array":["With Work Experience","No Work Experience"],"shape":[2],"dtype":"object","order":"little"}],["Count",{"type":"ndarray","array":{"type":"bytes","data":"PwQAAAkCAAA="},"shape":[2],"dtype":"int32","order":"little"}],["x",{"type":"ndarray","array":{"type":"bytes","data":"AAAAAAAAAAA6u4VfjVl5QA=="},"shape":[2],"dtype":"float64","order":"little"}],["y",{"type":"ndarray","array":{"type":"bytes","data":"AAAAAAAAAAA="},"shape":[2],"dtype":"int32","order":"little"}],["dx",{"type":"ndarray","array":{"type":"bytes","data":"OruFX41ZeUCMifRA5UxoQA=="},"shape":[2],"dtype":"float64","order":"little"}],["dy",{"type":"ndarray","array":{"type":"bytes","data":"AAAAAAAAeUABAAAAAAB5QA=="},"shape":[2],"dtype":"float64","order":"little"}]]}}},"view":{"type":"object","name":"CDSView","id":"p2916","attributes":{"filter":{"type":"object","name":"AllIndices","id":"p2917"}}},"glyph":{"type":"object","name":"Text","id":"p2912","attributes":{"x":{"type":"field","field":"x"},"y":{"type":"field","field":"y"},"text":{"type":"field","field":"CareerCategory"},"x_offset":{"type":"value","value":2},"text_color":{"type":"value","value":"white"},"text_font_size":{"type":"value","value":"14pt"}}},"nonselection_glyph":{"type":"object","name":"Text","id":"p2913","attributes":{"x":{"type":"field","field":"x"},"y":{"type":"field","field":"y"},"text":{"type":"field","field":"CareerCategory"},"x_offset":{"type":"value","value":2},"text_color":{"type":"value","value":"white"},"text_alpha":{"type":"value","value":0.1},"text_font_size":{"type":"value","value":"14pt"}}},"muted_glyph":{"type":"object","name":"Text","id":"p2914","attributes":{"x":{"type":"field","field":"x"},"y":{"type":"field","field":"y"},"text":{"type":"field","field":"CareerCategory"},"x_offset":{"type":"value","value":2},"text_color":{"type":"value","value":"white"},"text_alpha":{"type":"value","value":0.2},"text_font_size":{"type":"value","value":"14pt"}}}}},{"type":"object","name":"GlyphRenderer","id":"p2928","attributes":{"data_source":{"type":"object","name":"ColumnDataSource","id":"p2919","attributes":{"selected":{"type":"object","name":"Selection","id":"p2920","attributes":{"indices":[],"line_indices":[]}},"selection_policy":{"type":"object","name":"UnionRenderers","id":"p2921"},"data":{"type":"map","entries":[["level_0",{"type":"ndarray","array":{"type":"bytes","data":"AAAAAAEAAAACAAAAAwAAAAQAAAAAAAAAAQAAAA=="},"shape":[7],"dtype":"int32","order":"little"}],["index",{"type":"ndarray","array":{"type":"bytes","data":"BQAAAAQAAAADAAAAAgAAAAAAAAAGAAAAAQAAAA=="},"shape":[7],"dtype":"int32","order":"little"}],["CareerCategory",{"type":"ndarray","array":["With Work Experience","With Work Experience","With Work Experience","With Work Experience","With Work Experience","No Work Experience","No Work Experience"],"shape":[7],"dtype":"object","order":"little"}],["Career",{"type":"ndarray","array":["Developer","Engineer","Scientist","Programmer","Manager","Student","Graduate"],"shape":[7],"dtype":"object","order":"little"}],["Count",{"type":"ndarray","array":{"type":"bytes","data":"wwEAAJABAABtAAAAagAAABUAAADoAQAAIQAAAA=="},"shape":[7],"dtype":"int32","order":"little"}],["x",{"type":"ndarray","array":{"type":"bytes","data":"AAAAAAAAAAAAAAAAAAAAALRb+NWY2HNAtFv41ZjYc0C0W/jVmNhzQDq7hV+NWXlAOruFX41ZeUA="},"shape":[7],"dtype":"float64","order":"little"}],["y",{"type":"ndarray","array":{"type":"bytes","data":"AAAAAAAAAABzW/B7jH9qQAAAAAAAAAAAFUHDSd0XZ0Duy2MrgsZ2QAAAAAAAAAAANrsrL6Bqd0A="},"shape":[7],"dtype":"float64","order":"little"}],["dx",{"type":"ndarray","array":{"type":"bytes","data":"tFv41ZjYc0C0W/jVmNhzQBh+NSbSA1ZAGH41JtIDVkASfjUm0gNWQIyJ9EDlTGhAhYn0QOVMaEA="},"shape":[7],"dtype":"float64","order":"little"}],["dy",{"type":"ndarray","array":{"type":"bytes","data":"c1vwe4x/akCNpA+Ec4BnQBVBw0ndF2dAx1YEDSd1ZkCQoOGk7stBQDa7Ky+gandAr0xEDf1VOUA="},"shape":[7],"dtype":"float64","order":"little"}],["ytop",{"type":"ndarray","array":{"type":"bytes","data":"c1vwe4x/akAAAAAAAAB5QBVBw0ndF2dA7stjK4LGdkAAAAAAAAB5QDa7Ky+gandAAQAAAAAAeUA="},"shape":[7],"dtype":"float64","order":"little"}]]}}},"view":{"type":"object","name":"CDSView","id":"p2929","attributes":{"filter":{"type":"object","name":"AllIndices","id":"p2930"}}},"glyph":{"type":"object","name":"Text","id":"p2925","attributes":{"x":{"type":"field","field":"x"},"y":{"type":"field","field":"ytop"},"text":{"type":"field","field":"Career"},"x_offset":{"type":"value","value":2},"y_offset":{"type":"value","value":2},"text_color":{"type":"field","field":"CareerCategory","transform":{"type":"object","name":"CategoricalColorMapper","id":"p2918","attributes":{"palette":["black","white","black","white"],"factors":["With Work Experience","No Work Experience"]}}},"text_font_size":{"type":"value","value":"10pt"},"text_baseline":{"type":"value","value":"top"}}},"nonselection_glyph":{"type":"object","name":"Text","id":"p2926","attributes":{"x":{"type":"field","field":"x"},"y":{"type":"field","field":"ytop"},"text":{"type":"field","field":"Career"},"x_offset":{"type":"value","value":2},"y_offset":{"type":"value","value":2},"text_color":{"type":"field","field":"CareerCategory","transform":{"id":"p2918"}},"text_alpha":{"type":"value","value":0.1},"text_font_size":{"type":"value","value":"10pt"},"text_baseline":{"type":"value","value":"top"}}},"muted_glyph":{"type":"object","name":"Text","id":"p2927","attributes":{"x":{"type":"field","field":"x"},"y":{"type":"field","field":"ytop"},"text":{"type":"field","field":"Career"},"x_offset":{"type":"value","value":2},"y_offset":{"type":"value","value":2},"text_color":{"type":"field","field":"CareerCategory","transform":{"id":"p2918"}},"text_alpha":{"type":"value","value":0.2},"text_font_size":{"type":"value","value":"10pt"},"text_baseline":{"type":"value","value":"top"}}}}}],"toolbar":{"type":"object","name":"Toolbar","id":"p2872","attributes":{"tools":[{"type":"object","name":"PanTool","id":"p2885"},{"type":"object","name":"WheelZoomTool","id":"p2886"},{"type":"object","name":"BoxZoomTool","id":"p2887","attributes":{"overlay":{"type":"object","name":"BoxAnnotation","id":"p2888","attributes":{"syncable":false,"level":"overlay","visible":false,"left_units":"canvas","right_units":"canvas","bottom_units":"canvas","top_units":"canvas","line_color":"black","line_alpha":1.0,"line_width":2,"line_dash":[4,4],"fill_color":"lightgrey","fill_alpha":0.5}}}},{"type":"object","name":"SaveTool","id":"p2889"},{"type":"object","name":"ResetTool","id":"p2890"},{"type":"object","name":"HelpTool","id":"p2891"},{"type":"object","name":"HoverTool","id":"p2892","attributes":{"renderers":"auto","tooltips":"@Career"}}]}},"toolbar_location":null,"center":[{"type":"object","name":"Grid","id":"p2879","attributes":{"axis":{"type":"object","name":"LinearAxis","id":"p2875","attributes":{"ticker":{"type":"object","name":"BasicTicker","id":"p2876","attributes":{"mantissas":[1,2,5]}},"formatter":{"type":"object","name":"BasicTickFormatter","id":"p2877"},"major_label_policy":{"type":"object","name":"AllLabels","id":"p2878"}}},"grid_line_color":null}},{"type":"object","name":"Grid","id":"p2884","attributes":{"dimension":1,"axis":{"type":"object","name":"LinearAxis","id":"p2880","attributes":{"ticker":{"type":"object","name":"BasicTicker","id":"p2881","attributes":{"mantissas":[1,2,5]}},"formatter":{"type":"object","name":"BasicTickFormatter","id":"p2882"},"major_label_policy":{"type":"object","name":"AllLabels","id":"p2883"}}},"grid_line_color":null}}]}}]}};
+  const render_items = [{"docid":"b9bcd18b-449f-4cc9-b74a-deaa45436112","roots":{"p2864":"d793e019-3cac-41e5-8847-8bce81e8ca34"},"root_ids":["p2864"]}];
+  root.Bokeh.embed.embed_items_notebook(docs_json, render_items);
+  }
+  if (root.Bokeh !== undefined) {
+    embed_document(root);
+  } else {
+    let attempts = 0;
+    const timer = setInterval(function(root) {
+      if (root.Bokeh !== undefined) {
+        clearInterval(timer);
+        embed_document(root);
+      } else {
+        attempts++;
+        if (attempts > 100) {
+          clearInterval(timer);
+          console.log("Bokeh: ERROR: Unable to run BokehJS code because BokehJS library is missing");
+        }
+      }
+    }, 10, root)
+  }
+})(window);
+</script>
+</div>
+</div>
+<p>From the above chart, we can see that the people who follow this website are more people with work experience, mostly program developers, less administrators, and most of the students are school students.<br>
+Below we want to understand how post types have changed over the years.</p>
+<div id="064472b7" class="cell" data-execution_count="362">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Table Demo</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Ensure CreationDate is of datetime type</span></span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>Posts[<span class="st">'CreationDate'</span>] <span class="op">=</span> pd.to_datetime(Posts[<span class="st">'CreationDate'</span>])</span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Set start and end years</span></span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>start_year <span class="op">=</span> <span class="dv">2015</span></span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>end_year <span class="op">=</span> Posts[<span class="st">'CreationDate'</span>].dt.year.<span class="bu">max</span>()</span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Time periods every five years</span></span>
+<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a>time_periods <span class="op">=</span> <span class="bu">range</span>(start_year, end_year, <span class="dv">5</span>)</span>
+<span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-12"><a href="#cb23-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate counts of each type of post for each time period</span></span>
+<span id="cb23-13"><a href="#cb23-13" aria-hidden="true" tabindex="-1"></a>post_counts <span class="op">=</span> {ptype: [] <span class="cf">for</span> ptype <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>, <span class="dv">9</span>)}  <span class="co"># Post types from 1 to 8</span></span>
+<span id="cb23-14"><a href="#cb23-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-15"><a href="#cb23-15" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> period_start <span class="kw">in</span> time_periods:</span>
+<span id="cb23-16"><a href="#cb23-16" aria-hidden="true" tabindex="-1"></a>    period_end <span class="op">=</span> period_start <span class="op">+</span> <span class="dv">5</span></span>
+<span id="cb23-17"><a href="#cb23-17" aria-hidden="true" tabindex="-1"></a>    period_posts <span class="op">=</span> Posts[(Posts[<span class="st">'CreationDate'</span>].dt.year <span class="op">&gt;=</span> period_start) <span class="op">&amp;</span> (Posts[<span class="st">'CreationDate'</span>].dt.year <span class="op">&lt;</span> period_end)]</span>
+<span id="cb23-18"><a href="#cb23-18" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> ptype <span class="kw">in</span> post_counts.keys():</span>
+<span id="cb23-19"><a href="#cb23-19" aria-hidden="true" tabindex="-1"></a>        count <span class="op">=</span> period_posts[period_posts[<span class="st">'PostTypeId'</span>] <span class="op">==</span> ptype].shape[<span class="dv">0</span>]</span>
+<span id="cb23-20"><a href="#cb23-20" aria-hidden="true" tabindex="-1"></a>        post_counts[ptype].append(count)</span>
+<span id="cb23-21"><a href="#cb23-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-22"><a href="#cb23-22" aria-hidden="true" tabindex="-1"></a><span class="co"># Prepare data for plotting</span></span>
+<span id="cb23-23"><a href="#cb23-23" aria-hidden="true" tabindex="-1"></a>columns <span class="op">=</span> (<span class="st">'Question'</span>, <span class="st">'Answer'</span>, <span class="st">'Orphaned tag wiki'</span>, <span class="st">'Tag wiki excerpt'</span>, <span class="st">'Tag wiki'</span>,</span>
+<span id="cb23-24"><a href="#cb23-24" aria-hidden="true" tabindex="-1"></a>           <span class="st">'Moderator nomination'</span>, <span class="st">'Wiki placeholder'</span>, <span class="st">'Privilege wiki'</span>)</span>
+<span id="cb23-25"><a href="#cb23-25" aria-hidden="true" tabindex="-1"></a>rows <span class="op">=</span> [<span class="ss">f"</span><span class="sc">{</span>start<span class="sc">}</span><span class="ss">-</span><span class="sc">{</span>start <span class="op">+</span> <span class="dv">5</span><span class="sc">}</span><span class="ss">"</span> <span class="cf">for</span> start <span class="kw">in</span> time_periods]</span>
+<span id="cb23-26"><a href="#cb23-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-27"><a href="#cb23-27" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> np.array([post_counts[ptype] <span class="cf">for</span> ptype <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>, <span class="dv">9</span>)]).T</span>
+<span id="cb23-28"><a href="#cb23-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-29"><a href="#cb23-29" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot stacked bar chart and table</span></span>
+<span id="cb23-30"><a href="#cb23-30" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">12</span>, <span class="dv">8</span>))</span>
+<span id="cb23-31"><a href="#cb23-31" aria-hidden="true" tabindex="-1"></a>colors <span class="op">=</span> plt.cm.BuPu(np.linspace(<span class="dv">0</span>, <span class="fl">0.5</span>, <span class="bu">len</span>(rows)))</span>
+<span id="cb23-32"><a href="#cb23-32" aria-hidden="true" tabindex="-1"></a>y_offset <span class="op">=</span> np.zeros(<span class="bu">len</span>(columns))</span>
+<span id="cb23-33"><a href="#cb23-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-34"><a href="#cb23-34" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot bars and add text to table</span></span>
+<span id="cb23-35"><a href="#cb23-35" aria-hidden="true" tabindex="-1"></a>cell_text <span class="op">=</span> []</span>
+<span id="cb23-36"><a href="#cb23-36" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> row <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(data)):</span>
+<span id="cb23-37"><a href="#cb23-37" aria-hidden="true" tabindex="-1"></a>    ax.bar(columns, data[row], <span class="fl">0.5</span>, bottom<span class="op">=</span>y_offset, color<span class="op">=</span>colors[row])</span>
+<span id="cb23-38"><a href="#cb23-38" aria-hidden="true" tabindex="-1"></a>    y_offset <span class="op">+=</span> data[row]</span>
+<span id="cb23-39"><a href="#cb23-39" aria-hidden="true" tabindex="-1"></a>    cell_text.append([<span class="ss">f"</span><span class="sc">{</span><span class="bu">int</span>(x)<span class="sc">}</span><span class="ss">"</span> <span class="cf">for</span> x <span class="kw">in</span> y_offset])</span>
+<span id="cb23-40"><a href="#cb23-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-41"><a href="#cb23-41" aria-hidden="true" tabindex="-1"></a><span class="co"># Add table</span></span>
+<span id="cb23-42"><a href="#cb23-42" aria-hidden="true" tabindex="-1"></a>the_table <span class="op">=</span> ax.table(cellText<span class="op">=</span>cell_text, rowLabels<span class="op">=</span>rows, rowColours<span class="op">=</span>colors, colLabels<span class="op">=</span>columns, loc<span class="op">=</span><span class="st">'bottom'</span>)</span>
+<span id="cb23-43"><a href="#cb23-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-44"><a href="#cb23-44" aria-hidden="true" tabindex="-1"></a><span class="co"># Adjust layout to fit the table</span></span>
+<span id="cb23-45"><a href="#cb23-45" aria-hidden="true" tabindex="-1"></a>plt.subplots_adjust(left<span class="op">=</span><span class="fl">0.05</span>, bottom<span class="op">=</span><span class="fl">0.1</span>)</span>
+<span id="cb23-46"><a href="#cb23-46" aria-hidden="true" tabindex="-1"></a>ax.set_ylabel(<span class="st">'Counts'</span>)</span>
+<span id="cb23-47"><a href="#cb23-47" aria-hidden="true" tabindex="-1"></a>ax.set_title(<span class="st">'Post Types by 5-Year Periods'</span>)</span>
+<span id="cb23-48"><a href="#cb23-48" aria-hidden="true" tabindex="-1"></a>ax.set_xticks([])</span>
+<span id="cb23-49"><a href="#cb23-49" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Task8_files/figure-html/cell-20-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>From the chart above, we can see that posts are mainly distributed in Questions and Answers, and 2020-present has seen a huge increase in the number of posts, with Questions increasing by a factor of 2, Answers by a factor of 1.5, Tag Wiki excpert and Tag wiki have been only a small number of posts, and other types of posts.<br>
+We wanted to know in how many posts the hotter keywords in AI such as Artificial Intelligence, Natural Language Processing, Python have appeared. Then we can draw word cloud.</p>
+<div id="c9b9fdc0" class="cell" data-execution_count="363">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Drop rows containing missing values</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>Posts_cleaned <span class="op">=</span> Posts.dropna(subset<span class="op">=</span>[<span class="st">'Body'</span>, <span class="st">'Score'</span>])</span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Define keywords</span></span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>keywords <span class="op">=</span> [<span class="st">'Artificial Intelligence'</span>, <span class="st">'AI'</span>, <span class="st">'Python'</span>, <span class="st">'Java'</span>, <span class="st">'NLP'</span>, <span class="st">'Natural Language Processing'</span>]</span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>keyword_counts <span class="op">=</span> {}</span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Count occurrences and total score for each keyword</span></span>
+<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> keyword <span class="kw">in</span> keywords:</span>
+<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a>    Posts_hotwords <span class="op">=</span> Posts_cleaned[Posts_cleaned[<span class="st">'Body'</span>].<span class="bu">str</span>.contains(keyword, case<span class="op">=</span><span class="va">False</span>)]</span>
+<span id="cb24-11"><a href="#cb24-11" aria-hidden="true" tabindex="-1"></a>    keyword_counts[keyword] <span class="op">=</span> {<span class="st">'Count'</span>: <span class="bu">len</span>(Posts_hotwords), <span class="st">'Total Score'</span>: Posts_hotwords[<span class="st">'Score'</span>].<span class="bu">sum</span>()}</span>
+<span id="cb24-12"><a href="#cb24-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-13"><a href="#cb24-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Create DataFrame</span></span>
+<span id="cb24-14"><a href="#cb24-14" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.DataFrame(keyword_counts).T</span>
+<span id="cb24-15"><a href="#cb24-15" aria-hidden="true" tabindex="-1"></a>df.index.name <span class="op">=</span> <span class="st">'Keyword'</span></span>
+<span id="cb24-16"><a href="#cb24-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-17"><a href="#cb24-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Sort by Total Score in descending order</span></span>
+<span id="cb24-18"><a href="#cb24-18" aria-hidden="true" tabindex="-1"></a>df_sorted <span class="op">=</span> df.sort_values(by<span class="op">=</span><span class="st">'Total Score'</span>, ascending<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb24-19"><a href="#cb24-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-20"><a href="#cb24-20" aria-hidden="true" tabindex="-1"></a><span class="co"># Print the table</span></span>
+<span id="cb24-21"><a href="#cb24-21" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df_sorted)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                             Count  Total Score
+Keyword                                        
+AI                           18821        44514
+Artificial Intelligence        837         3213
+Python                         893         2091
+NLP                            485         1354
+Natural Language Processing    181          660
+Java                           141          401</code></pre>
+</div>
+</div>
+<div id="0e301ae1" class="cell" data-execution_count="364">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> wordcloud <span class="im">import</span> WordCloud</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert DataFrame to dictionary for WordCloud</span></span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>keyword_scores <span class="op">=</span> df_sorted[<span class="st">'Total Score'</span>].to_dict()</span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Create WordCloud object</span></span>
+<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a>wordcloud <span class="op">=</span> WordCloud(width<span class="op">=</span><span class="dv">600</span>, height<span class="op">=</span><span class="dv">300</span>, background_color <span class="op">=</span><span class="st">'white'</span>).generate_from_frequencies(keyword_scores)</span>
+<span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-10"><a href="#cb26-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot WordCloud</span></span>
+<span id="cb26-11"><a href="#cb26-11" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">5</span>))</span>
+<span id="cb26-12"><a href="#cb26-12" aria-hidden="true" tabindex="-1"></a>plt.imshow(wordcloud, interpolation<span class="op">=</span><span class="st">'bilinear'</span>)</span>
+<span id="cb26-13"><a href="#cb26-13" aria-hidden="true" tabindex="-1"></a>plt.axis(<span class="st">'off'</span>)</span>
+<span id="cb26-14"><a href="#cb26-14" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Hot Words Cloud'</span>)</span>
+<span id="cb26-15"><a href="#cb26-15" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Task8_files/figure-html/cell-22-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>In AI Q&amp;A website, people always mention AI, and Python is even hotter than NLP and Java.<br>
+Below we will analyze how Tag’s themes have changed over the years.</p>
+<div id="2f8d7021" class="cell" data-execution_count="365">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> collections <span class="im">import</span> Counter</span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Extracting years</span></span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>Posts[<span class="st">'Year'</span>] <span class="op">=</span> Posts[<span class="st">'CreationDate'</span>].dt.year</span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Initialize a list to store tags for all years</span></span>
+<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a>all_tags <span class="op">=</span> []</span>
+<span id="cb27-9"><a href="#cb27-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-10"><a href="#cb27-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Iterate over all posts' tag lists</span></span>
+<span id="cb27-11"><a href="#cb27-11" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> tags_list <span class="kw">in</span> Posts[<span class="st">'Tags'</span>].<span class="bu">str</span>.findall(<span class="vs">r'&lt;(.*?)&gt;'</span>):</span>
+<span id="cb27-12"><a href="#cb27-12" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="bu">isinstance</span>(tags_list, <span class="bu">list</span>):</span>
+<span id="cb27-13"><a href="#cb27-13" aria-hidden="true" tabindex="-1"></a>        all_tags.extend(tags_list)</span>
+<span id="cb27-14"><a href="#cb27-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-15"><a href="#cb27-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Count total occurrences of all tags</span></span>
+<span id="cb27-16"><a href="#cb27-16" aria-hidden="true" tabindex="-1"></a>total_tag_counts <span class="op">=</span> Counter(all_tags)</span>
+<span id="cb27-17"><a href="#cb27-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-18"><a href="#cb27-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Find top 10 tags by occurrences</span></span>
+<span id="cb27-19"><a href="#cb27-19" aria-hidden="true" tabindex="-1"></a>top_10_tags <span class="op">=</span> [tag <span class="cf">for</span> tag, _ <span class="kw">in</span> total_tag_counts.most_common(<span class="dv">10</span>)]<span class="co">#Set Top </span></span>
+<span id="cb27-20"><a href="#cb27-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-21"><a href="#cb27-21" aria-hidden="true" tabindex="-1"></a><span class="co"># Initialize a dictionary to store tag counts for each year</span></span>
+<span id="cb27-22"><a href="#cb27-22" aria-hidden="true" tabindex="-1"></a>tag_counts_by_year <span class="op">=</span> {}</span>
+<span id="cb27-23"><a href="#cb27-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-24"><a href="#cb27-24" aria-hidden="true" tabindex="-1"></a><span class="co"># Iterate over each year</span></span>
+<span id="cb27-25"><a href="#cb27-25" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> year <span class="kw">in</span> Posts[<span class="st">'Year'</span>].unique():</span>
+<span id="cb27-26"><a href="#cb27-26" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Filter posts for the current year</span></span>
+<span id="cb27-27"><a href="#cb27-27" aria-hidden="true" tabindex="-1"></a>    posts_for_year <span class="op">=</span> Posts[Posts[<span class="st">'Year'</span>] <span class="op">==</span> year]</span>
+<span id="cb27-28"><a href="#cb27-28" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb27-29"><a href="#cb27-29" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Store all tags for the current year</span></span>
+<span id="cb27-30"><a href="#cb27-30" aria-hidden="true" tabindex="-1"></a>    all_tags_for_year <span class="op">=</span> []</span>
+<span id="cb27-31"><a href="#cb27-31" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb27-32"><a href="#cb27-32" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Iterate over tag lists for each post in the current year</span></span>
+<span id="cb27-33"><a href="#cb27-33" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> tags_list <span class="kw">in</span> posts_for_year[<span class="st">'Tags'</span>].<span class="bu">str</span>.findall(<span class="vs">r'&lt;(.*?)&gt;'</span>):</span>
+<span id="cb27-34"><a href="#cb27-34" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="bu">isinstance</span>(tags_list, <span class="bu">list</span>):</span>
+<span id="cb27-35"><a href="#cb27-35" aria-hidden="true" tabindex="-1"></a>            all_tags_for_year.extend(tags_list)</span>
+<span id="cb27-36"><a href="#cb27-36" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb27-37"><a href="#cb27-37" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Count occurrences of each tag for the current year</span></span>
+<span id="cb27-38"><a href="#cb27-38" aria-hidden="true" tabindex="-1"></a>    year_tag_counts <span class="op">=</span> Counter(all_tags_for_year)</span>
+<span id="cb27-39"><a href="#cb27-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-40"><a href="#cb27-40" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Create "Others" category</span></span>
+<span id="cb27-41"><a href="#cb27-41" aria-hidden="true" tabindex="-1"></a>    other_tags_count <span class="op">=</span> <span class="bu">sum</span>(count <span class="cf">for</span> tag, count <span class="kw">in</span> year_tag_counts.items() <span class="cf">if</span> tag <span class="kw">not</span> <span class="kw">in</span> top_10_tags)</span>
+<span id="cb27-42"><a href="#cb27-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-43"><a href="#cb27-43" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Update dictionary with top 10 tags and "Others" category</span></span>
+<span id="cb27-44"><a href="#cb27-44" aria-hidden="true" tabindex="-1"></a>    tag_counts_by_year[year] <span class="op">=</span> {tag: (year_tag_counts[tag] <span class="cf">if</span> tag <span class="kw">in</span> top_10_tags <span class="cf">else</span> <span class="dv">0</span>) <span class="cf">for</span> tag <span class="kw">in</span> total_tag_counts}</span>
+<span id="cb27-45"><a href="#cb27-45" aria-hidden="true" tabindex="-1"></a>    tag_counts_by_year[year][<span class="st">'Others'</span>] <span class="op">=</span> other_tags_count</span>
+<span id="cb27-46"><a href="#cb27-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-47"><a href="#cb27-47" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert to DataFrame</span></span>
+<span id="cb27-48"><a href="#cb27-48" aria-hidden="true" tabindex="-1"></a>df_by_year <span class="op">=</span> pd.DataFrame(tag_counts_by_year).fillna(<span class="dv">0</span>).astype(<span class="bu">int</span>)</span>
+<span id="cb27-49"><a href="#cb27-49" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-50"><a href="#cb27-50" aria-hidden="true" tabindex="-1"></a><span class="co"># Keep columns for top 10 tags and "Others" category</span></span>
+<span id="cb27-51"><a href="#cb27-51" aria-hidden="true" tabindex="-1"></a>df_by_year <span class="op">=</span> df_by_year.loc[top_10_tags <span class="op">+</span> [<span class="st">'Others'</span>]]</span>
+<span id="cb27-52"><a href="#cb27-52" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-53"><a href="#cb27-53" aria-hidden="true" tabindex="-1"></a><span class="co"># Print DataFrame</span></span>
+<span id="cb27-54"><a href="#cb27-54" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df_by_year.shape)</span>
+<span id="cb27-55"><a href="#cb27-55" aria-hidden="true" tabindex="-1"></a>df_by_year.head(<span class="dv">11</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>(11, 8)</code></pre>
+</div>
+<div class="cell-output cell-output-display" data-execution_count="365">
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">2016</th>
+<th data-quarto-table-cell-role="th">2017</th>
+<th data-quarto-table-cell-role="th">2018</th>
+<th data-quarto-table-cell-role="th">2019</th>
+<th data-quarto-table-cell-role="th">2020</th>
+<th data-quarto-table-cell-role="th">2021</th>
+<th data-quarto-table-cell-role="th">2022</th>
+<th data-quarto-table-cell-role="th">2023</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">neural-networks</td>
+<td>93</td>
+<td>170</td>
+<td>349</td>
+<td>528</td>
+<td>527</td>
+<td>353</td>
+<td>243</td>
+<td>279</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">reinforcement-learning</td>
+<td>15</td>
+<td>51</td>
+<td>188</td>
+<td>440</td>
+<td>732</td>
+<td>366</td>
+<td>325</td>
+<td>262</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">machine-learning</td>
+<td>43</td>
+<td>163</td>
+<td>293</td>
+<td>509</td>
+<td>478</td>
+<td>285</td>
+<td>254</td>
+<td>273</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">deep-learning</td>
+<td>31</td>
+<td>83</td>
+<td>189</td>
+<td>417</td>
+<td>467</td>
+<td>307</td>
+<td>228</td>
+<td>257</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">convolutional-neural-networks</td>
+<td>21</td>
+<td>45</td>
+<td>129</td>
+<td>267</td>
+<td>277</td>
+<td>188</td>
+<td>116</td>
+<td>118</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">natural-language-processing</td>
+<td>25</td>
+<td>46</td>
+<td>62</td>
+<td>118</td>
+<td>156</td>
+<td>110</td>
+<td>84</td>
+<td>137</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">computer-vision</td>
+<td>7</td>
+<td>20</td>
+<td>49</td>
+<td>84</td>
+<td>124</td>
+<td>84</td>
+<td>61</td>
+<td>104</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">deep-rl</td>
+<td>3</td>
+<td>4</td>
+<td>22</td>
+<td>58</td>
+<td>130</td>
+<td>106</td>
+<td>99</td>
+<td>81</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">classification</td>
+<td>11</td>
+<td>33</td>
+<td>48</td>
+<td>97</td>
+<td>108</td>
+<td>56</td>
+<td>64</td>
+<td>63</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">training</td>
+<td>5</td>
+<td>27</td>
+<td>54</td>
+<td>79</td>
+<td>112</td>
+<td>71</td>
+<td>50</td>
+<td>76</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">Others</td>
+<td>970</td>
+<td>1191</td>
+<td>2528</td>
+<td>4465</td>
+<td>6168</td>
+<td>4831</td>
+<td>3272</td>
+<td>3822</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<div id="b61216b9" class="cell" data-execution_count="366">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> bar_label_demo(df):</span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="st">'Others'</span> <span class="kw">in</span> df.index:</span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>        df <span class="op">=</span> df.drop(<span class="st">'Others'</span>)<span class="co">#If show others the bar label demo will not look good. </span></span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a>    categories <span class="op">=</span> df.index</span>
+<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a>    years <span class="op">=</span> df.columns</span>
+<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-8"><a href="#cb29-8" aria-hidden="true" tabindex="-1"></a>    data <span class="op">=</span> np.array(df)</span>
+<span id="cb29-9"><a href="#cb29-9" aria-hidden="true" tabindex="-1"></a>    data_cum <span class="op">=</span> np.cumsum(data, axis<span class="op">=</span><span class="dv">0</span>)</span>
+<span id="cb29-10"><a href="#cb29-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-11"><a href="#cb29-11" aria-hidden="true" tabindex="-1"></a>    colors <span class="op">=</span> plt.cm.viridis(np.linspace(<span class="dv">0</span>, <span class="dv">1</span>, <span class="bu">len</span>(categories)))</span>
+<span id="cb29-12"><a href="#cb29-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-13"><a href="#cb29-13" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Decrease the size of the plot</span></span>
+<span id="cb29-14"><a href="#cb29-14" aria-hidden="true" tabindex="-1"></a>    fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">4</span>))</span>
+<span id="cb29-15"><a href="#cb29-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-16"><a href="#cb29-16" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i, (category, color) <span class="kw">in</span> <span class="bu">enumerate</span>(<span class="bu">zip</span>(categories, colors)):</span>
+<span id="cb29-17"><a href="#cb29-17" aria-hidden="true" tabindex="-1"></a>        starts <span class="op">=</span> data_cum[i] <span class="op">-</span> data[i]</span>
+<span id="cb29-18"><a href="#cb29-18" aria-hidden="true" tabindex="-1"></a>        bars <span class="op">=</span> ax.bar(years, data[i], bottom<span class="op">=</span>starts, color<span class="op">=</span>color, edgecolor<span class="op">=</span><span class="st">'white'</span>, label<span class="op">=</span><span class="ss">f'</span><span class="sc">{</span>category<span class="sc">}</span><span class="ss"> Bar'</span>)</span>
+<span id="cb29-19"><a href="#cb29-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-20"><a href="#cb29-20" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Add line plots</span></span>
+<span id="cb29-21"><a href="#cb29-21" aria-hidden="true" tabindex="-1"></a>        ax.plot(years, data[i], marker<span class="op">=</span><span class="st">'o'</span>, color<span class="op">=</span>color)</span>
+<span id="cb29-22"><a href="#cb29-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-23"><a href="#cb29-23" aria-hidden="true" tabindex="-1"></a>    ax.set_xlabel(<span class="st">'Year'</span>)</span>
+<span id="cb29-24"><a href="#cb29-24" aria-hidden="true" tabindex="-1"></a>    ax.set_ylabel(<span class="st">'Tag Count'</span>)</span>
+<span id="cb29-25"><a href="#cb29-25" aria-hidden="true" tabindex="-1"></a>    ax.legend(title<span class="op">=</span><span class="st">'Tag Categories'</span>, bbox_to_anchor<span class="op">=</span>(<span class="fl">1.05</span>, <span class="dv">1</span>), loc<span class="op">=</span><span class="st">'upper left'</span>)</span>
+<span id="cb29-26"><a href="#cb29-26" aria-hidden="true" tabindex="-1"></a>    plt.title(<span class="st">'Tag Distribution by Year'</span>)</span>
+<span id="cb29-27"><a href="#cb29-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-28"><a href="#cb29-28" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> fig, ax</span>
+<span id="cb29-29"><a href="#cb29-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-30"><a href="#cb29-30" aria-hidden="true" tabindex="-1"></a>bar_label_demo(df_by_year)</span>
+<span id="cb29-31"><a href="#cb29-31" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Task8_files/figure-html/cell-24-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>From the above figure, we can see that people are most interested in neural-networks all the time, followed by reinforcement-learning, machine-learning, and deep-learning, with reinforcement-learning becoming very hot in 2020, but gradually declining after 2021.</p>
+</section>
+<section id="conclusion" class="level3">
+<h3 class="anchored" data-anchor-id="conclusion">Conclusion</h3>
+<p>Our analysis of the AI Stack Exchange data revealed intriguing insights into the vibrant community that surrounds the platform. Geographically, the majority of users hail from regions such as India and the USA, underscoring the global reach and appeal of AI-related discussions. Occupationally, a significant proportion of users identify as developers or programmers, reflecting a cohort deeply entrenched in the technical aspects of AI.</p>
+<p>Examining post types over time elucidated a surge in activity, particularly in questions and answers, signaling a growing engagement within the community. Moreover, our investigation into keyword mentions showcased the prominence of AI-related terms such as Artificial Intelligence and Python, indicative of the prevalent interests among users.</p>
+<p>Finally, analyzing the evolution of tag themes underscored perennial interests in neural networks, machine learning, and deep learning, with fluctuations observed in topics like reinforcement learning.</p>
+<p>In summation, our study provides valuable insights into the AI Stack Exchange ecosystem, shedding light on the diverse interests, occupations, and trends shaping discussions within the AI community.</p>
+</section>
+<section id="reference" class="level3">
+<h3 class="anchored" data-anchor-id="reference">Reference</h3>
+<p>Archive.org. (n.d.). Stack Exchange Data Dump - March 2020. Retrieved from https://archive.org/download/stackexchange</p>
+<p>Gagolewski, M. (2020). Minimalist Data Wrangling with Python.</p>
+<p>Matplotlib. (n.d.). Matplotlib Gallery. Retrieved from https://matplotlib.org/stable/gallery/index</p>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
